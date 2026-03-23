@@ -32,8 +32,8 @@ Funcoes publicas:
 import os
 import random
 
-from config import CAMINHO_HISTORICO, CAMINHO_PERGUNTAS, NUM_PERGUNTAS_FIXAS
-from json_store import carregar_json, guardar_json
+from src.infra.config import CAMINHO_HISTORICO, CAMINHO_PERGUNTAS, NUM_PERGUNTAS_FIXAS
+from src.infra.json_store import carregar_json, guardar_json
 
 
 DIFICULDADES_VALIDAS = {"facil": True, "media": True, "dificil": True}

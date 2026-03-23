@@ -26,18 +26,18 @@ Funcoes publicas:
 
 import time
 
-from config import CONFIG_PADRAO, LIMITES, NUM_PERGUNTAS_FIXAS, TEMPO_LIMITE_FIXO
-from jogo_service import aplicar_avaliacao_no_estado, avaliar_resposta, finalizar_estado_sessao, iniciar_estado_sessao
-from log_service import registrar_evento
-from perguntas_service import (
+from src.domain.jogo_service import aplicar_avaliacao_no_estado, avaliar_resposta, finalizar_estado_sessao, iniciar_estado_sessao
+from src.domain.perguntas_service import (
     atualizar_historico_global,
     filtrar_perguntas,
     listar_dificuldades,
     reiniciar_historico_se_necessario,
     selecionar_perguntas_com_historico,
 )
-from pontuacoes_service import guardar_resultado
-from ui import (
+from src.domain.pontuacoes_service import guardar_resultado
+from src.infra.config import CONFIG_PADRAO, LIMITES, NUM_PERGUNTAS_FIXAS, TEMPO_LIMITE_FIXO
+from src.infra.log_service import registrar_evento
+from src.ui.ui import (
     aguardar_enter,
     iniciar_ecra,
     mostrar_mensagem_aviso,
@@ -46,7 +46,7 @@ from ui import (
     mostrar_mensagem_sucesso,
     mostrar_resumo,
 )
-from validacao import pedir_confirmacao, pedir_inteiro_intervalo, pedir_nickname
+from src.ui.validacao import pedir_confirmacao, pedir_inteiro_intervalo, pedir_nickname
 
 
 ROTULOS_DIFICULDADE = {

@@ -178,5 +178,136 @@
     "contexto": {
       "motivo": "encerramento"
     }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:12",
+    "nivel": "INFO",
+    "evento": "app_inicio",
+    "contexto": {
+      "componente": "quiz_python"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:12",
+    "nivel": "INFO",
+    "evento": "carga_perguntas_concluida",
+    "contexto": {
+      "total": 48,
+      "validas": 48,
+      "invalidas": 0
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:12",
+    "nivel": "INFO",
+    "evento": "app_fim",
+    "contexto": {
+      "motivo": "encerramento"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:20",
+    "nivel": "INFO",
+    "evento": "app_inicio",
+    "contexto": {
+      "componente": "quiz_python"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:20",
+    "nivel": "INFO",
+    "evento": "app_inicio",
+    "contexto": {
+      "componente": "quiz_python"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:20",
+    "nivel": "INFO",
+    "evento": "carga_perguntas_concluida",
+    "contexto": {
+      "total": 48,
+      "validas": 48,
+      "invalidas": 0
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:20",
+    "nivel": "INFO",
+    "evento": "app_fim",
+    "contexto": {
+      "motivo": "encerramento"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:37:20",
+    "nivel": "INFO",
+    "evento": "app_fim",
+    "contexto": {
+      "motivo": "encerramento"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:38:14",
+    "nivel": "INFO",
+    "evento": "app_inicio",
+    "contexto": {
+      "componente": "quiz_python"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:38:14",
+    "nivel": "INFO",
+    "evento": "carga_perguntas_concluida",
+    "contexto": {
+      "total": 48,
+      "validas": 48,
+      "invalidas": 0
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:38:14",
+    "nivel": "INFO",
+    "evento": "app_fim",
+    "contexto": {
+      "motivo": "encerramento"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:39:58",
+    "nivel": "INFO",
+    "evento": "app_inicio",
+    "contexto": {
+      "componente": "quiz_python"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:39:58",
+    "nivel": "INFO",
+    "evento": "carga_perguntas_concluida",
+    "contexto": {
+      "total": 48,
+      "validas": 48,
+      "invalidas": 0
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:40:29",
+    "nivel": "INFO",
+    "evento": "sessao_inicio",
+    "contexto": {
+      "nickname": "Nuno",
+      "modo": "jogo",
+      "dificuldade": "facil",
+      "num_perguntas": 10
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:40:32",
+    "nivel": "INFO",
+    "evento": "app_fim",
+    "contexto": {
+      "motivo": "encerramento"
+    }
   }
 ]

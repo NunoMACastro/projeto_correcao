@@ -4,7 +4,7 @@ Responsabilidade:
     Ponto de entrada da aplicacao.
 
 Dependencias:
-    - app_service
+    - src.app.app_service
 
 Contratos de entrada/saida:
     - iniciar_aplicacao(): delega bootstrap para a camada de aplicacao.
@@ -13,7 +13,7 @@ Funcoes publicas:
     - iniciar_aplicacao
 """
 
-from app_service import executar_aplicacao
+from src.app.app_service import executar_aplicacao
 
 
 def iniciar_aplicacao():

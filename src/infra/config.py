@@ -4,7 +4,7 @@ Responsabilidade:
     Centralizar constantes da aplicacao quiz.
 
 Dependencias:
-    Nenhuma.
+    - pathlib
 
 Contratos de entrada/saida:
     - Entradas: nenhuma (constantes estaticas).
@@ -14,10 +14,16 @@ Funcoes publicas:
     Nenhuma (apenas constantes).
 """
 
-CAMINHO_PERGUNTAS = "perguntas.json"
-CAMINHO_PONTUACOES = "pontuacoes.json"
-CAMINHO_HISTORICO = "historico_perguntas.json"
-CAMINHO_LOG_EVENTOS = "logs_eventos.json"
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "data"
+
+CAMINHO_PERGUNTAS = str(DATA_DIR / "perguntas.json")
+CAMINHO_PONTUACOES = str(DATA_DIR / "pontuacoes.json")
+CAMINHO_HISTORICO = str(DATA_DIR / "historico_perguntas.json")
+CAMINHO_LOG_EVENTOS = str(DATA_DIR / "logs_eventos.json")
 
 NUM_PERGUNTAS_FIXAS = 10
 TEMPO_LIMITE_FIXO = 20

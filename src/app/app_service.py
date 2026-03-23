@@ -26,14 +26,14 @@ Funcoes publicas:
     - executar_aplicacao
 """
 
-from campeonato_flow import executar_fluxo_campeonato
-from config import MENU_PRINCIPAL_OPCOES
-from jogo_flow import executar_fluxo_jogo
-from log_service import registrar_evento
-from menu import ler_opcao_menu, mostrar_menu_principal
-from perguntas_service import carregar_perguntas_com_relatorio
-from pontuacoes_service import mostrar_top10
-from ui import aguardar_enter, iniciar_ecra, mostrar_mensagem_aviso, mostrar_mensagem_erro, mostrar_regras
+from src.app.campeonato_flow import executar_fluxo_campeonato
+from src.app.jogo_flow import executar_fluxo_jogo
+from src.domain.perguntas_service import carregar_perguntas_com_relatorio
+from src.domain.pontuacoes_service import mostrar_top10
+from src.infra.config import MENU_PRINCIPAL_OPCOES
+from src.infra.log_service import registrar_evento
+from src.ui.menu import ler_opcao_menu, mostrar_menu_principal
+from src.ui.ui import aguardar_enter, iniciar_ecra, mostrar_mensagem_aviso, mostrar_mensagem_erro, mostrar_regras
 
 
 def carregar_contexto_aplicacao():

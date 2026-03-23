@@ -15,7 +15,7 @@ Funcoes publicas:
     - ler_opcao_menu
 """
 
-from validacao import pedir_inteiro_intervalo
+from src.ui.validacao import pedir_inteiro_intervalo
 
 
 def mostrar_menu_principal(opcoes):

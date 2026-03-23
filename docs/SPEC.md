@@ -6,9 +6,9 @@ Data de referencia: 2026-03-23
 
 Em caso de conflito entre documentos:
 
-1. `SPEC.md` (fonte de verdade)
+1. `docs/SPEC.md` (fonte de verdade)
 2. `README.md`
-3. `PLANIFICACAO.md`
+3. `docs/PLANIFICACAO.md`
 
 ## Invariantes funcionais
 
@@ -30,7 +30,7 @@ Em caso de conflito entre documentos:
 
 ## Regras de validacao de perguntas
 
-- O ficheiro `perguntas.json` deve conter uma lista.
+- O ficheiro `data/perguntas.json` deve conter uma lista.
 - Cada pergunta valida deve ter:
   - `id` nao vazio e unico
   - `pergunta` nao vazia
@@ -44,14 +44,14 @@ Em caso de conflito entre documentos:
 
 ## Contratos de dados persistidos
 
-### `perguntas.json`
+### `data/perguntas.json`
 
 - Tipo: `list[dict]`
 - Campos por pergunta:
   - obrigatorios: `id`, `pergunta`, `opcoes`, `resposta`, `categoria`, `dificuldade`
   - opcional: `explicacao`
 
-### `pontuacoes.json`
+### `data/pontuacoes.json`
 
 - Tipo: `list[dict]`
 - Campos por registo:
@@ -66,13 +66,13 @@ Compatibilidade de leitura/apresentacao no Top 10:
 - `data_iso` invalida/ausente -> `sem data`
 - campos numericos ausentes -> `0`
 
-### `historico_perguntas.json`
+### `data/historico_perguntas.json`
 
 - Tipo: `dict`
 - Formato:
   - `{"ids_usadas_global": ["p001", "p002", ...]}`
 
-### `logs_eventos.json`
+### `data/logs_eventos.json`
 
 - Tipo: `list[dict]`
 - Schema por evento:
@@ -89,8 +89,8 @@ Compatibilidade de leitura/apresentacao no Top 10:
 3. Sistema escolhe 10 perguntas aleatorias, sem repeticao na sessao e priorizando nao repetidas globalmente.
 4. Cada resposta e validada e avaliada com tempo limite de 20s.
 5. App mostra feedback imediato (correta/errada/fora de tempo) e explicacao quando existir.
-6. Resultado final e mostrado e guardado em `pontuacoes.json`.
-7. IDs da sessao sao guardadas em `historico_perguntas.json`.
+6. Resultado final e mostrado e guardado em `data/pontuacoes.json`.
+7. IDs da sessao sao guardadas em `data/historico_perguntas.json`.
 
 ## Fluxo campeonato
 
@@ -101,7 +101,7 @@ Compatibilidade de leitura/apresentacao no Top 10:
 
 ## Fluxo Top 10
 
-1. Sistema carrega `pontuacoes.json` e ordena por pontos desc, percentagem desc e data desc.
+1. Sistema carrega `data/pontuacoes.json` e ordena por pontos desc, percentagem desc e data desc.
 2. Sistema apresenta ate 10 registos em formato detalhado:
    - posicao, nickname, pontos, percentagem, certas/erradas, numero de perguntas,
      dificuldade, modo, data/hora.

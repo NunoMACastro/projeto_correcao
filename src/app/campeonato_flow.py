@@ -19,13 +19,13 @@ Funcoes publicas:
     - executar_fluxo_campeonato
 """
 
-from campeonato_service import determinar_vencedor_campeonato, registar_resultado_ronda, selecionar_perguntas_ronda
-from config import LIMITES, NUM_PERGUNTAS_FIXAS
-from jogo_flow import configurar_sessao_base, escolher_filtro, executar_sessao_interativa
-from log_service import registrar_evento
-from perguntas_service import filtrar_perguntas, listar_dificuldades
-from ui import aguardar_enter, iniciar_ecra, mostrar_mensagem_erro
-from validacao import pedir_nickname
+from src.app.jogo_flow import configurar_sessao_base, escolher_filtro, executar_sessao_interativa
+from src.domain.campeonato_service import determinar_vencedor_campeonato, registar_resultado_ronda, selecionar_perguntas_ronda
+from src.domain.perguntas_service import filtrar_perguntas, listar_dificuldades
+from src.infra.config import LIMITES, NUM_PERGUNTAS_FIXAS
+from src.infra.log_service import registrar_evento
+from src.ui.ui import aguardar_enter, iniciar_ecra, mostrar_mensagem_erro
+from src.ui.validacao import pedir_nickname
 
 
 def executar_fluxo_campeonato(contexto_app):

@@ -25,7 +25,7 @@ Funcoes publicas:
 
 import os
 
-from validacao import terminar_se_comando_saida
+from src.ui.validacao import terminar_se_comando_saida
 
 
 def limpar_ecra():

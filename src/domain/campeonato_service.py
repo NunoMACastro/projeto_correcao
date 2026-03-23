@@ -18,8 +18,8 @@ Funcoes publicas:
     - jogar_campeonato
 """
 
-from jogo_service import jogar_sessao
-from perguntas_service import selecionar_perguntas_aleatorias
+from src.domain.jogo_service import jogar_sessao
+from src.domain.perguntas_service import selecionar_perguntas_aleatorias
 
 
 def selecionar_perguntas_ronda(perguntas, quantidade, ids_usadas_torneio):

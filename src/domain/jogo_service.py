@@ -20,7 +20,7 @@ Funcoes publicas:
     - jogar_sessao
 """
 
-from perguntas_service import normalizar_indice_resposta
+from src.domain.perguntas_service import normalizar_indice_resposta
 
 
 def pontuar_resposta(correta, dificuldade="facil", usar_pesos=False):

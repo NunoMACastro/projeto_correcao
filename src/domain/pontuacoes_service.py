@@ -21,8 +21,8 @@ Funcoes publicas:
 
 from datetime import datetime
 
-from config import CAMINHO_PONTUACOES
-from json_store import carregar_json, guardar_json
+from src.infra.config import CAMINHO_PONTUACOES
+from src.infra.json_store import carregar_json, guardar_json
 
 
 def _converter_inteiro(valor, padrao=0):

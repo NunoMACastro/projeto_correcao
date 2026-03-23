@@ -23,7 +23,7 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 
 ### 2.1 MVP (obrigatório)
 
-- [x] Carregar `perguntas.json`
+- [x] Carregar `data/perguntas.json`
 - [x] Validar: ficheiro existe, não vazio, campos mínimos (`pergunta`, `opcoes`)
 - [x] Menu principal com opções obrigatórias:
   - [x] (1) Jogar
@@ -50,7 +50,7 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 - [x] B) Não repetir perguntas na sessão
 - [x] B extra) Evitar repetição entre sessões enquanto existirem novas
 - [x] C) Pedir nickname
-- [x] C) Guardar resultado em `pontuacoes.json`
+- [x] C) Guardar resultado em `data/pontuacoes.json`
 - [x] C) Mostrar Top 10 no menu
 - [x] D) Mostrar `explicacao` (quando existir)
 
@@ -66,9 +66,9 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 
 - Sem classes; estado do jogo será guardado em dicionários.
 - Persistência em JSON:
-    - `perguntas.json`
-    - `pontuacoes.json`
-    - `historico_perguntas.json` (extra para evitar repetição entre sessões)
+    - `data/perguntas.json`
+    - `data/pontuacoes.json`
+    - `data/historico_perguntas.json` (extra para evitar repetição entre sessões)
 - Compatibilidade com `resposta` em formato:
     - índice numérico
     - texto da opção correta
@@ -117,7 +117,7 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 }
 ```
 
-### 4.3 Registo de pontuação persistida (`pontuacoes.json`)
+### 4.3 Registo de pontuação persistida (`data/pontuacoes.json`)
 
 ```python
 [
@@ -136,7 +136,7 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 ]
 ```
 
-### 4.4 Histórico de IDs usados entre sessões (`historico_perguntas.json`)
+### 4.4 Histórico de IDs usados entre sessões (`data/historico_perguntas.json`)
 
 ```python
 {
@@ -154,7 +154,7 @@ Regras:
 
 | Entradas                      | Processamento                         | Saídas                                        |
 | ----------------------------- | ------------------------------------- | --------------------------------------------- |
-| `perguntas.json`              | leitura + validação de schema mínimo  | lista de perguntas válidas em memória         |
+| `data/perguntas.json`              | leitura + validação de schema mínimo  | lista de perguntas válidas em memória         |
 | escolha do menu               | validação de opção                    | navegação entre fluxos                        |
 | `10` perguntas por sessão     | seleção fixa por dificuldade          | seleção aleatória sem repetição               |
 | resposta do jogador           | normalização e comparação com correta | feedback acerto/erro + atualização de pontos  |
@@ -172,34 +172,46 @@ Regras:
 ```text
 .
 ├── main.py
-├── menu.py
-├── ui.py
-├── json_store.py
-├── perguntas_service.py
-├── jogo_service.py
-├── pontuacoes_service.py
-├── campeonato_service.py
-├── validacao.py
-├── config.py
-├── perguntas.json
-├── pontuacoes.json
-├── historico_perguntas.json
-├── PLANIFICACAO.md
-└── README.md
+├── README.md
+├── 11_projeto_final_python.md
+├── src/
+│   ├── app/
+│   │   ├── app_service.py
+│   │   ├── jogo_flow.py
+│   │   └── campeonato_flow.py
+│   ├── domain/
+│   │   ├── jogo_service.py
+│   │   ├── campeonato_service.py
+│   │   ├── perguntas_service.py
+│   │   └── pontuacoes_service.py
+│   ├── infra/
+│   │   ├── config.py
+│   │   ├── json_store.py
+│   │   └── log_service.py
+│   └── ui/
+│       ├── ui.py
+│       ├── menu.py
+│       └── validacao.py
+├── data/
+│   ├── perguntas.json
+│   ├── pontuacoes.json
+│   ├── historico_perguntas.json
+│   └── logs_eventos.json
+└── docs/
+    ├── SPEC.md
+    ├── PLANIFICACAO.md
+    └── CHANGELOG.md
 ```
 
 ### Responsabilidade por módulo
 
-- `main.py`: ciclo principal da app, bootstrap e roteamento de opções.
-- `menu.py`: definição e leitura de menus.
-- `ui.py`: impressão formatada e prompts reutilizáveis.
-- `json_store.py`: leitura/escrita segura de JSON.
-- `perguntas_service.py`: carga, validação, filtros e seleção de perguntas.
-- `jogo_service.py`: execução da sessão com contra-relógio fixo.
-- `pontuacoes_service.py`: persistência e ranking Top 10.
-- `campeonato_service.py`: lógica melhor-de-3 para dois jogadores.
-- `validacao.py`: validações genéricas de input.
-- `config.py`: constantes (limites, defaults, labels).
+- `main.py`: ponto de entrada único (`python3 main.py`).
+- `src/app`: bootstrap/menu e fluxos interativos.
+- `src/domain`: regras de negócio de jogo, perguntas, pontuações e campeonato.
+- `src/infra`: constantes, JSON store e logging.
+- `src/ui`: apresentação e validação de input.
+- `data/`: persistência de perguntas, histórico, pontuações e logs.
+- `docs/`: documentação técnica de suporte.
 
 ---
 
@@ -353,7 +365,7 @@ Observação:
 
 ### 10.2 Evitar repetição entre sessões (Nível 2-B extra)
 
-- Guardar IDs em `historico_perguntas.json`.
+- Guardar IDs em `data/historico_perguntas.json`.
 - Filtrar universo elegível removendo IDs já usados.
 - Se não houver suficientes perguntas novas:
     - resetar histórico para o universo atual
@@ -409,8 +421,8 @@ Observação:
 
 1. Menu: inserir letra (`a`) e confirmar que repete sem crash.
 2. Menu: inserir número fora do intervalo e repetir pedido.
-3. `perguntas.json` em falta: mostrar erro claro e encerrar com segurança.
-4. `perguntas.json` vazio: impedir jogo e informar problema.
+3. `data/perguntas.json` em falta: mostrar erro claro e encerrar com segurança.
+4. `data/perguntas.json` vazio: impedir jogo e informar problema.
 5. Pergunta sem `opcoes`: detetar inválida e não usar.
 6. Resposta com campo `resposta` textual: avaliação correta.
 7. Resposta com campo `resposta` numérica: avaliação correta.

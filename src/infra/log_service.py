@@ -17,8 +17,8 @@ Funcoes publicas:
 
 from datetime import datetime
 
-from config import CAMINHO_LOG_EVENTOS
-from json_store import carregar_json, guardar_json
+from src.infra.config import CAMINHO_LOG_EVENTOS
+from src.infra.json_store import carregar_json, guardar_json
 
 
 def normalizar_contexto(contexto):
