@@ -1,1 +1,108 @@
-[]
+[
+  {
+    "nickname": "Nuno",
+    "modo": "relogio",
+    "pontos": 11,
+    "certas": 9,
+    "erradas": 1,
+    "percentagem": 90.0,
+    "num_perguntas": 10,
+    "categoria": "todas",
+    "dificuldade": "todas",
+    "ids_usadas_sessao": [
+      "p006",
+      "p036",
+      "p029",
+      "p020",
+      "p039",
+      "p047",
+      "p035",
+      "p025",
+      "p046",
+      "p041"
+    ],
+    "detalhes": [
+      {
+        "id": "p006",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 2,
+        "respondeu_em_segundos": 5.025,
+        "explicacao": "Em muitos currículos escolares, o Nilo é indicado como o mais longo."
+      },
+      {
+        "id": "p036",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 6.019,
+        "explicacao": "Um ano do calendário gregoriano tem 12 meses."
+      },
+      {
+        "id": "p029",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 2.88,
+        "explicacao": "A função built-in len devolve o tamanho de coleções."
+      },
+      {
+        "id": "p020",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 2.031,
+        "explicacao": "Marte é chamado planeta vermelho devido ao óxido de ferro na superfície."
+      },
+      {
+        "id": "p039",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 2.14,
+        "explicacao": "9 x 9 = 81."
+      },
+      {
+        "id": "p047",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 4.088,
+        "explicacao": "Azul + amarelo resulta em verde na mistura tradicional de pigmentos."
+      },
+      {
+        "id": "p035",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 2.072,
+        "explicacao": "O idioma oficial do Brasil é o português."
+      },
+      {
+        "id": "p025",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 1,
+        "respondeu_em_segundos": 2.564,
+        "explicacao": "Todo o projeto foi implementado em Python."
+      },
+      {
+        "id": "p046",
+        "correta": false,
+        "fora_tempo": false,
+        "pontos": 0,
+        "respondeu_em_segundos": 5.517,
+        "explicacao": "Python usa True e False com inicial maiúscula."
+      },
+      {
+        "id": "p041",
+        "correta": true,
+        "fora_tempo": false,
+        "pontos": 2,
+        "respondeu_em_segundos": 17.682,
+        "explicacao": "O Muro de Berlim caiu em 1989."
+      }
+    ],
+    "data_iso": "2026-03-23T20:08:18"
+  }
+]

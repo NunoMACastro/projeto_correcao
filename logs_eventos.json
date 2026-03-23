@@ -24,5 +24,55 @@
     "contexto": {
       "motivo": "encerramento"
     }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:07:17",
+    "nivel": "INFO",
+    "evento": "app_inicio",
+    "contexto": {
+      "componente": "quiz_python"
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:07:17",
+    "nivel": "INFO",
+    "evento": "carga_perguntas_concluida",
+    "contexto": {
+      "total": 48,
+      "validas": 48,
+      "invalidas": 0
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:07:28",
+    "nivel": "INFO",
+    "evento": "sessão_inicio",
+    "contexto": {
+      "nickname": "Nuno",
+      "modo": "jogo",
+      "dificuldade": "todas",
+      "num_perguntas": 10
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:08:18",
+    "nivel": "INFO",
+    "evento": "pontuacao_guardada",
+    "contexto": {
+      "nickname": "Nuno",
+      "pontos": 11
+    }
+  },
+  {
+    "timestamp_iso": "2026-03-23T20:08:18",
+    "nivel": "INFO",
+    "evento": "sessão_fim",
+    "contexto": {
+      "nickname": "Nuno",
+      "modo": "jogo",
+      "pontos": 11,
+      "certas": 9,
+      "erradas": 1
+    }
   }
 ]
