@@ -26,14 +26,12 @@ MENU_PRINCIPAL_OPCOES = [
 LIMITES = {
     "nickname_min": 1,
     "nickname_max": 20,
-    "num_perguntas_min": 1,
-    "num_perguntas_max": 50,
     "tempo_limite_min": 5,
     "tempo_limite_max": 60,
 }
 
 CONFIG_PADRAO = {
-    "num_perguntas": 5,
+    "num_perguntas": NUM_PERGUNTAS_FIXAS,
     "categoria": "todas",
     "dificuldade": "todas",
     "tempo_limite": 12,

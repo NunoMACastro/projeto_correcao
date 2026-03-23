@@ -11,10 +11,10 @@ Implementar um quiz de consola em Python com arquitetura modular, sem classes, u
 - funções
 - módulos
 
-Meta deste plano: cobrir **todos** os requisitos funcionais do enunciado, incluindo opcionais:
+Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 
 - MVP completo
-- Nível 2: A, B, C, D e extra de B
+- Nível 2: dificuldade, anti-repetição, pontuações e explicações
 - Nível 3: A, B e C
 
 ---
@@ -30,7 +30,7 @@ Meta deste plano: cobrir **todos** os requisitos funcionais do enunciado, inclui
   - [x] (2) Regras / Ajuda
   - [x] (3) Sair
 - [x] Modo de jogo:
-  - [x] Escolher `N` perguntas aleatórias
+  - [x] Escolher 10 perguntas aleatórias
   - [x] Mostrar pergunta e opções numeradas
   - [x] Pedir e validar resposta (letras, vazio, fora de intervalo)
   - [x] Informar acerto/erro
@@ -41,9 +41,8 @@ Meta deste plano: cobrir **todos** os requisitos funcionais do enunciado, inclui
   - [x] Percentagem
 - [x] Re-jogar sem reiniciar a aplicação
 
-### 2.2 Nível 2 (todos os opcionais implementados)
+### 2.2 Nível 2 (implementação final)
 
-- [x] A) Filtro por categoria
 - [x] A) Filtro por dificuldade (`facil`, `media`, `dificil`)
 - [x] A) Opção "todas"
 - [x] B) Não repetir perguntas na sessão
@@ -98,7 +97,7 @@ Meta deste plano: cobrir **todos** os requisitos funcionais do enunciado, inclui
     "nickname": "nuno",
     "modo": "normal",  # normal | relogio | campeonato
     "config": {
-        "num_perguntas": 5,
+        "num_perguntas": 10,
         "categoria": "todas",
         "dificuldade": "todas",
         "tempo_limite": 12,
@@ -128,7 +127,7 @@ Meta deste plano: cobrir **todos** os requisitos funcionais do enunciado, inclui
         "certas": 4,
         "erradas": 1,
         "percentagem": 80.0,
-        "num_perguntas": 5,
+        "num_perguntas": 10,
         "categoria": "todas",
         "dificuldade": "media"
     }
@@ -155,9 +154,9 @@ Regras:
 | ----------------------------- | ------------------------------------- | --------------------------------------------- |
 | `perguntas.json`              | leitura + validação de schema mínimo  | lista de perguntas válidas em memória         |
 | escolha do menu               | validação de opção                    | navegação entre fluxos                        |
-| `N` perguntas                 | validação intervalo e disponibilidade | seleção aleatória sem repetição               |
+| `10` perguntas por sessão     | seleção fixa por dificuldade          | seleção aleatória sem repetição               |
 | resposta do jogador           | normalização e comparação com correta | feedback acerto/erro + atualização de pontos  |
-| filtros categoria/dificuldade | filtrar lista base                    | conjunto elegível para sessão                 |
+| filtro dificuldade            | filtrar lista base por dificuldade    | conjunto elegível para sessão                 |
 | nickname                      | validação (não vazio, tamanho limite) | identificador para ranking                    |
 | resultado final               | serializar e guardar em JSON          | histórico persistente                         |
 | pedido Top 10                 | ordenar por pontos/percentagem/data   | tabela Top 10 no terminal                     |
@@ -305,12 +304,11 @@ Regra de projeto:
     - 3 Sair
     - 4 Top 10
     - 5 Modo Campeonato
-    - 6 Configurações (tempo limite, pesos por dificuldade, N)
 4. Se escolha inválida, mostrar erro e repetir.
 5. Em "Jogar":
     - pedir nickname
-    - pedir filtros (categoria/dificuldade ou "todas")
-    - pedir N
+    - pedir dificuldade (ou "todas")
+    - usar 10 perguntas fixas
     - montar conjunto elegível
     - aplicar regra anti-repetição (sessão + global)
     - iniciar sessão (normal ou contra-relógio)
@@ -385,7 +383,7 @@ Observação:
 
 ### Fase C - Nível 2 completo (Dias 4-5)
 
-- Filtros categoria/dificuldade.
+- Filtro por dificuldade.
 - Não repetição sessão + global.
 - Persistência de pontuações + Top 10.
 - Mostrar explicações.
@@ -406,7 +404,7 @@ Observação:
 
 ---
 
-## 12) Plano de testes manuais (min 7, aqui: 18)
+## 12) Plano de testes manuais (min 7, aqui: 17)
 
 1. Menu: inserir letra (`a`) e confirmar que repete sem crash.
 2. Menu: inserir número fora do intervalo e repetir pedido.
@@ -415,17 +413,16 @@ Observação:
 5. Pergunta sem `opcoes`: detetar inválida e não usar.
 6. Resposta com campo `resposta` textual: avaliação correta.
 7. Resposta com campo `resposta` numérica: avaliação correta.
-8. Sessão com `N` maior que perguntas elegíveis: ajustar ou avisar corretamente.
+8. Verificar que a sessão usa 10 perguntas fixas.
 9. Garantir não repetição na mesma sessão.
 10. Garantir não repetição entre sessões enquanto houver novas perguntas.
 11. Top 10: guardar múltiplos resultados e confirmar ordenação correta.
-12. Filtro categoria: escolher categoria específica e receber apenas essa.
-13. Filtro dificuldade: escolher `media` e receber apenas `media`.
-14. Opção `todas` em filtros: incluir universo completo.
-15. Explicação: mostrar quando campo existe; omitir sem crash quando não existe.
-16. Contra-relógio: responder após limite e validar contagem como errada.
-17. Pontuação por dificuldade: verificar valores 1/2/3.
-18. Campeonato: simular 3 rondas e confirmar vencedor correto.
+12. Filtro dificuldade: escolher `media` e receber apenas `media`.
+13. Opção `todas` no filtro: incluir universo completo.
+14. Explicação: mostrar quando campo existe; omitir sem crash quando não existe.
+15. Contra-relógio: responder após limite e validar contagem como errada.
+16. Pontuação por dificuldade: verificar valores 1/2/3.
+17. Campeonato: simular 3 rondas e confirmar vencedor correto.
 
 ---
 
@@ -444,8 +441,8 @@ Observação:
 - Risco: inconsistências no formato de `resposta`.
     - Mitigação: normalização centralizada (`normalizar_indice_resposta`).
 
-- Risco: poucos dados para filtros específicos.
-    - Mitigação: mensagens claras e fallback para "todas".
+- Risco: poucos dados para uma dificuldade específica.
+    - Mitigação: mensagens claras e possibilidade de escolher "todas".
 
 - Risco: histórico global bloquear novas sessões.
     - Mitigação: reset automático quando universo elegível esgotar.
@@ -460,5 +457,5 @@ Observação:
 Este plano implementa o quiz completo com arquitetura modular, sem classes, com persistência JSON e documentação equivalente a JSDoc em Python (docstrings de módulo e função), cobrindo integralmente:
 
 - MVP
-- Nível 2 inteiro (incluindo opcionais e extra)
+- Nível 2 (com dificuldade, anti-repetição, pontuações e explicações)
 - Nível 3 inteiro (todos os opcionais)

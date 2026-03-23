@@ -40,8 +40,8 @@ python3 main.py
 
 ### Nivel 2
 
-- Filtro por categoria e dificuldade
-- Opcao `todas` nos filtros
+- Filtro por dificuldade (`facil`, `media`, `dificil`)
+- Opcao `todas` no filtro de dificuldade
 - Sem repeticao de perguntas na mesma sessao
 - Anti-repeticao entre sessoes enquanto houver perguntas novas
 - Nickname por jogador
