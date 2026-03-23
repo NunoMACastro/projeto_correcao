@@ -1,12 +1,17 @@
 """pontuacoes_service.py
 
 Responsabilidade:
-    Guardar e apresentar ranking de pontuacoes.
+    Persistir resultados e apresentar ranking Top 10.
 
 Dependencias:
     - datetime
-    - json_store
     - config
+    - json_store
+
+Contratos de entrada/saida:
+    - guardar_resultado(...): persiste registo de sessao.
+    - obter_top10(...): devolve ranking ordenado.
+    - mostrar_top10(...): imprime ranking no terminal.
 
 Funcoes publicas:
     - guardar_resultado
@@ -21,7 +26,7 @@ from json_store import carregar_json, guardar_json
 
 
 def guardar_resultado(resultado, caminho=CAMINHO_PONTUACOES):
-    """Guarda resultado de uma sessao em historico JSON.
+    """Guarda resultado de sessao em historico JSON.
 
     Args:
         resultado (dict): Dados finais da sessao.
@@ -29,8 +34,18 @@ def guardar_resultado(resultado, caminho=CAMINHO_PONTUACOES):
 
     Returns:
         None
+
+    Raises:
+        ValueError: Quando ficheiro existente contem JSON invalido.
+        OSError: Em falhas de escrita do ficheiro.
+
+    Side Effects:
+        - Le e escreve ficheiro de pontuacoes.
     """
     historico = carregar_json(caminho, [])
+    if not isinstance(historico, list):
+        historico = []
+
     registo = dict(resultado)
     registo["data_iso"] = datetime.now().isoformat(timespec="seconds")
     historico.append(registo)
@@ -44,9 +59,18 @@ def obter_top10(caminho=CAMINHO_PONTUACOES):
         caminho (str): Caminho do ficheiro de pontuacoes.
 
     Returns:
-        list[dict]: Top 10 ordenado por pontos e percentagem.
+        list[dict]: Top 10 ordenado por pontos, percentagem e data.
+
+    Raises:
+        ValueError: Quando ficheiro existente contem JSON invalido.
+
+    Side Effects:
+        - Le ficheiro de pontuacoes.
     """
     historico = carregar_json(caminho, [])
+    if not isinstance(historico, list):
+        historico = []
+
     ordenado = sorted(
         historico,
         key=lambda r: (
@@ -67,6 +91,13 @@ def mostrar_top10(caminho=CAMINHO_PONTUACOES):
 
     Returns:
         None
+
+    Raises:
+        ValueError: Quando ficheiro existente contem JSON invalido.
+
+    Side Effects:
+        - Le ficheiro de pontuacoes.
+        - Escreve no terminal.
     """
     top = obter_top10(caminho)
     print("\nTop 10")
@@ -79,4 +110,3 @@ def mostrar_top10(caminho=CAMINHO_PONTUACOES):
         pontos = registo.get("pontos", 0)
         percentagem = registo.get("percentagem", 0.0)
         print(f"{posicao:02d}. {nome} - {pontos} pts ({percentagem}%)")
-

@@ -1,10 +1,14 @@
 """config.py
 
 Responsabilidade:
-    Centralizar constantes e configuracoes base da aplicacao quiz.
+    Centralizar constantes da aplicacao quiz.
 
 Dependencias:
     Nenhuma.
+
+Contratos de entrada/saida:
+    - Entradas: nenhuma (constantes estaticas).
+    - Saidas: valores reutilizaveis em UI, dominio e infraestrutura.
 
 Funcoes publicas:
     Nenhuma (apenas constantes).
@@ -13,6 +17,8 @@ Funcoes publicas:
 CAMINHO_PERGUNTAS = "perguntas.json"
 CAMINHO_PONTUACOES = "pontuacoes.json"
 CAMINHO_HISTORICO = "historico_perguntas.json"
+CAMINHO_LOG_EVENTOS = "logs_eventos.json"
+
 NUM_PERGUNTAS_FIXAS = 10
 TEMPO_LIMITE_FIXO = 20
 

@@ -1,16 +1,21 @@
 """campeonato_service.py
 
 Responsabilidade:
-    Coordenar modo campeonato (melhor de 3 rondas para 2 jogadores).
+    Coordenar dominio do modo campeonato (melhor de 3 rondas, 2 jogadores).
 
 Dependencias:
     - jogo_service
     - perguntas_service
 
+Contratos de entrada/saida:
+    - jogar_campeonato(...): devolve placar completo sem imprimir no terminal.
+
 Funcoes publicas:
-    - jogar_campeonato
+    - selecionar_perguntas_ronda
     - jogar_ronda_campeonato
+    - registar_resultado_ronda
     - determinar_vencedor_campeonato
+    - jogar_campeonato
 """
 
 from jogo_service import jogar_sessao
@@ -18,22 +23,28 @@ from perguntas_service import selecionar_perguntas_aleatorias
 
 
 def selecionar_perguntas_ronda(perguntas, quantidade, ids_usadas_torneio):
-    """Seleciona perguntas para uma ronda evitando repeticoes no torneio.
+    """Seleciona perguntas para uma ronda evitando repeticoes do torneio.
 
     Args:
         perguntas (list[dict]): Universo elegivel do campeonato.
         quantidade (int): Numero de perguntas por ronda.
-        ids_usadas_torneio (dict[str, bool]): IDs ja usadas em rondas anteriores.
+        ids_usadas_torneio (dict[str, bool]): IDs usadas em rondas anteriores.
 
     Returns:
-        tuple[list[dict], dict[str, bool]]: Perguntas da ronda e IDs usadas atualizadas.
+        tuple[list[dict], dict[str, bool]]: Perguntas da ronda e mapa de IDs atualizado.
+
+    Raises:
+        Nenhum.
+
+    Side Effects:
+        - Usa gerador pseudoaleatorio da standard library.
     """
     ronda = selecionar_perguntas_aleatorias(
         perguntas=perguntas,
         quantidade=quantidade,
         ids_evitar=ids_usadas_torneio,
     )
-    if len(ronda) < min(max(1, quantidade), len(perguntas)):
+    if len(ronda) < min(max(1, int(quantidade)), len(perguntas)):
         ids_usadas_torneio = {}
         ronda = selecionar_perguntas_aleatorias(
             perguntas=perguntas,
@@ -46,29 +57,85 @@ def selecionar_perguntas_ronda(perguntas, quantidade, ids_usadas_torneio):
     return ronda, ids_usadas_torneio
 
 
-def jogar_ronda_campeonato(jogador, perguntas_ronda, config):
-    """Executa uma ronda de campeonato para um jogador.
+def jogar_ronda_campeonato(jogador, perguntas_ronda, config, fornecedor_resposta):
+    """Executa uma ronda para um jogador no campeonato.
 
     Args:
         jogador (str): Nome do jogador.
         perguntas_ronda (list[dict]): Perguntas da ronda.
-        config (dict): Configuracao ativa.
+        config (dict): Configuracao ativa da ronda.
+        fornecedor_resposta (callable): Callback de resposta interativa.
 
     Returns:
         dict: Resultado da ronda para o jogador.
+
+    Raises:
+        ValueError: Quando callback de resposta e invalido.
+
+    Side Effects:
+        - Side effects dependem apenas do callback injetado.
     """
-    print(f"\nRonda para {jogador}")
-    return jogar_sessao(perguntas_ronda, config, jogador)
+    return jogar_sessao(perguntas_ronda, config, jogador, fornecedor_resposta)
+
+
+def registar_resultado_ronda(placar, numero_ronda, jogador_1, jogador_2, resultado_1, resultado_2):
+    """Atualiza placar com o resultado de uma ronda.
+
+    Args:
+        placar (dict): Estrutura acumulada do campeonato.
+        numero_ronda (int): Numero da ronda atual.
+        jogador_1 (str): Nome do jogador 1.
+        jogador_2 (str): Nome do jogador 2.
+        resultado_1 (dict): Resultado da ronda para jogador 1.
+        resultado_2 (dict): Resultado da ronda para jogador 2.
+
+    Returns:
+        dict: Mesmo placar, atualizado in-place.
+
+    Raises:
+        Nenhum.
+
+    Side Effects:
+        - Mutacao in-place do dicionario `placar`.
+    """
+    pontos_1 = int(resultado_1.get("pontos", 0))
+    pontos_2 = int(resultado_2.get("pontos", 0))
+
+    placar["jogador_1"]["pontos_totais"] += pontos_1
+    placar["jogador_2"]["pontos_totais"] += pontos_2
+
+    detalhe = {
+        "ronda": int(numero_ronda),
+        "pontos_jogador_1": pontos_1,
+        "pontos_jogador_2": pontos_2,
+        "vencedor_ronda": "empate",
+    }
+
+    if pontos_1 > pontos_2:
+        placar["jogador_1"]["rondas_ganhas"] += 1
+        detalhe["vencedor_ronda"] = jogador_1
+    elif pontos_2 > pontos_1:
+        placar["jogador_2"]["rondas_ganhas"] += 1
+        detalhe["vencedor_ronda"] = jogador_2
+
+    placar["detalhes_rondas"].append(detalhe)
+    return placar
 
 
 def determinar_vencedor_campeonato(placar):
-    """Determina vencedor final com base no placar de rondas e pontos.
+    """Determina vencedor final pelo numero de rondas e depois pontos totais.
 
     Args:
-        placar (dict): Estrutura com dados de rondas e pontos por jogador.
+        placar (dict): Estrutura do campeonato.
 
     Returns:
-        str: Nome do vencedor ou 'empate'.
+        str: Nome do vencedor ou `'empate'`.
+
+    Raises:
+        Nenhum.
+
+    Side Effects:
+        Nenhum.
     """
     j1 = placar["jogador_1"]
     j2 = placar["jogador_2"]
@@ -86,18 +153,36 @@ def determinar_vencedor_campeonato(placar):
     return "empate"
 
 
-def jogar_campeonato(perguntas, config_base, jogador_1, jogador_2):
-    """Executa melhor de 3 rondas para dois jogadores.
+def jogar_campeonato(
+    perguntas,
+    config_base,
+    jogador_1,
+    jogador_2,
+    fornecedor_resposta_j1,
+    fornecedor_resposta_j2,
+):
+    """Executa campeonato completo para dois jogadores.
 
     Args:
-        perguntas (list[dict]): Perguntas disponiveis.
-        config_base (dict): Configuracao base de jogo.
+        perguntas (list[dict]): Perguntas disponiveis para o campeonato.
+        config_base (dict): Configuracao base da sessao.
         jogador_1 (str): Nome do primeiro jogador.
         jogador_2 (str): Nome do segundo jogador.
+        fornecedor_resposta_j1 (callable): Callback de resposta do jogador 1.
+        fornecedor_resposta_j2 (callable): Callback de resposta do jogador 2.
 
     Returns:
-        dict: Placar final do campeonato.
+        dict: Placar final com detalhes por ronda e vencedor.
+
+    Raises:
+        ValueError: Quando callbacks sao invalidos.
+
+    Side Effects:
+        - Side effects dependem apenas dos callbacks injetados.
     """
+    if not callable(fornecedor_resposta_j1) or not callable(fornecedor_resposta_j2):
+        raise ValueError("Callbacks de resposta do campeonato devem ser callables.")
+
     placar = {
         "jogador_1": {"nome": jogador_1, "rondas_ganhas": 0, "pontos_totais": 0},
         "jogador_2": {"nome": jogador_2, "rondas_ganhas": 0, "pontos_totais": 0},
@@ -108,34 +193,32 @@ def jogar_campeonato(perguntas, config_base, jogador_1, jogador_2):
     ids_usadas_torneio = {}
 
     for numero_ronda in range(1, 4):
-        print(f"\n=== Ronda {numero_ronda}/3 ===")
         perguntas_ronda, ids_usadas_torneio = selecionar_perguntas_ronda(
             perguntas=perguntas,
             quantidade=quantidade_por_ronda,
             ids_usadas_torneio=ids_usadas_torneio,
         )
-        resultado_1 = jogar_ronda_campeonato(jogador_1, perguntas_ronda, config_base)
-        resultado_2 = jogar_ronda_campeonato(jogador_2, perguntas_ronda, config_base)
 
-        placar["jogador_1"]["pontos_totais"] += int(resultado_1.get("pontos", 0))
-        placar["jogador_2"]["pontos_totais"] += int(resultado_2.get("pontos", 0))
-        detalhe = {
-            "ronda": numero_ronda,
-            "pontos_jogador_1": int(resultado_1.get("pontos", 0)),
-            "pontos_jogador_2": int(resultado_2.get("pontos", 0)),
-            "vencedor_ronda": "empate",
-        }
+        resultado_1 = jogar_ronda_campeonato(
+            jogador=jogador_1,
+            perguntas_ronda=perguntas_ronda,
+            config=config_base,
+            fornecedor_resposta=fornecedor_resposta_j1,
+        )
+        resultado_2 = jogar_ronda_campeonato(
+            jogador=jogador_2,
+            perguntas_ronda=perguntas_ronda,
+            config=config_base,
+            fornecedor_resposta=fornecedor_resposta_j2,
+        )
 
-        if resultado_1.get("pontos", 0) > resultado_2.get("pontos", 0):
-            placar["jogador_1"]["rondas_ganhas"] += 1
-            detalhe["vencedor_ronda"] = jogador_1
-        elif resultado_2.get("pontos", 0) > resultado_1.get("pontos", 0):
-            placar["jogador_2"]["rondas_ganhas"] += 1
-            detalhe["vencedor_ronda"] = jogador_2
-        placar["detalhes_rondas"].append(detalhe)
-        print(
-            f"Ronda {numero_ronda}: {jogador_1} {detalhe['pontos_jogador_1']} - "
-            f"{detalhe['pontos_jogador_2']} {jogador_2}"
+        registar_resultado_ronda(
+            placar=placar,
+            numero_ronda=numero_ronda,
+            jogador_1=jogador_1,
+            jogador_2=jogador_2,
+            resultado_1=resultado_1,
+            resultado_2=resultado_2,
         )
 
     placar["vencedor"] = determinar_vencedor_campeonato(placar)

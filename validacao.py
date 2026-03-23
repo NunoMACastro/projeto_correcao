@@ -1,10 +1,14 @@
 """validacao.py
 
 Responsabilidade:
-    Fornecer funcoes de validacao robusta para entradas do utilizador.
+    Centralizar validacao robusta de input de consola.
 
 Dependencias:
     Nenhuma.
+
+Contratos de entrada/saida:
+    - Funcoes recebem prompts/limites e devolvem valores validados.
+    - Comandos globais de saida (`sair`, `0`, etc.) terminam aplicacao.
 
 Funcoes publicas:
     - construir_prompt_com_saida
@@ -16,89 +20,116 @@ Funcoes publicas:
 
 
 def construir_prompt_com_saida(prompt):
-    """Constroi prompt com instrucoes de saida para o utilizador.
+    """Constroi prompt com instrucao padrao de saida.
 
     Args:
         prompt (str): Prompt base.
 
     Returns:
-        str: Prompt enriquecido com dica de comando de saida.
+        str: Prompt enriquecido com dica de saida.
+
+    Raises:
+        Nenhum.
+
+    Side Effects:
+        Nenhum.
     """
-    texto = prompt.strip()
+    texto = str(prompt).strip()
     if texto.endswith(":"):
         texto = texto[:-1].strip()
     return f"{texto} (ou escreve 'sair' ou '0'): "
 
 
 def terminar_se_comando_saida(texto):
-    """Termina a aplicacao se o utilizador escrever um comando de saida.
+    """Termina aplicacao se texto corresponder a comando de saida.
 
     Args:
-        texto (str): Conteudo introduzido pelo utilizador.
+        texto (str | None): Texto introduzido pelo utilizador.
 
     Returns:
         None
 
     Raises:
-        SystemExit: Quando o utilizador pede para sair da aplicacao.
+        SystemExit: Quando utilizador pede encerramento da app.
+
+    Side Effects:
+        - Escreve aviso de encerramento no terminal.
     """
     if texto is None:
         return
 
-    comando = texto.strip().lower()
+    comando = str(texto).strip().lower()
     if comando in ("sair", "exit", "quit", "q", "0"):
         print("A terminar aplicacao por comando do utilizador.")
         raise SystemExit(0)
 
 
 def pedir_inteiro_intervalo(prompt, minimo, maximo):
-    """Pede um inteiro no intervalo [minimo, maximo].
+    """Pede inteiro dentro de intervalo fechado [minimo, maximo].
 
     Args:
-        prompt (str): Texto a apresentar no input.
+        prompt (str): Texto do input.
         minimo (int): Limite inferior permitido.
         maximo (int): Limite superior permitido.
 
     Returns:
-        int: Inteiro valido no intervalo.
+        int: Valor valido no intervalo pedido.
+
+    Raises:
+        SystemExit: Quando utilizador pede saida.
+
+    Side Effects:
+        - Le input do terminal.
+        - Escreve mensagens de validacao no terminal.
     """
     while True:
         texto = input(construir_prompt_com_saida(prompt)).strip()
         terminar_se_comando_saida(texto)
+
         if not texto:
             print("Entrada vazia. Tenta novamente.")
             continue
         if not texto.isdigit():
             print("Entrada invalida. Introduz apenas numeros.")
             continue
+
         valor = int(texto)
-        if valor < minimo or valor > maximo:
+        if valor < int(minimo) or valor > int(maximo):
             print(f"Valor fora do intervalo ({minimo}-{maximo}).")
             continue
         return valor
 
 
 def pedir_confirmacao(prompt):
-    """Pede uma confirmacao do tipo sim/nao.
+    """Pede confirmacao do tipo sim/nao.
 
     Args:
         prompt (str): Texto da pergunta.
 
     Returns:
         bool: True para sim, False para nao.
+
+    Raises:
+        SystemExit: Quando utilizador pede saida.
+
+    Side Effects:
+        - Le input do terminal.
+        - Escreve mensagens de validacao no terminal.
     """
     while True:
         texto = input(construir_prompt_com_saida(prompt)).strip().lower()
         terminar_se_comando_saida(texto)
+
         if texto in ("s", "sim", "y", "yes"):
             return True
         if texto in ("n", "nao", "não", "no"):
             return False
+
         print("Resposta invalida. Usa 's' para sim ou 'n' para nao.")
 
 
 def pedir_nickname(minimo=1, maximo=20):
-    """Pede nickname nao vazio e com tamanho valido.
+    """Pede nickname nao vazio e dentro dos limites configurados.
 
     Args:
         minimo (int): Tamanho minimo permitido.
@@ -106,12 +137,20 @@ def pedir_nickname(minimo=1, maximo=20):
 
     Returns:
         str: Nickname valido.
+
+    Raises:
+        SystemExit: Quando utilizador pede saida.
+
+    Side Effects:
+        - Le input do terminal.
+        - Escreve mensagens de validacao no terminal.
     """
     while True:
         nome = input(construir_prompt_com_saida("Nickname: ")).strip()
         terminar_se_comando_saida(nome)
+
         tamanho = len(nome)
-        if tamanho < minimo or tamanho > maximo:
+        if tamanho < int(minimo) or tamanho > int(maximo):
             print(f"Nickname deve ter entre {minimo} e {maximo} caracteres.")
             continue
         return nome

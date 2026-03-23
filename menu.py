@@ -1,10 +1,14 @@
 """menu.py
 
 Responsabilidade:
-    Apresentar menus e ler escolhas validas do utilizador.
+    Apresentar menu principal e ler opcao valida.
 
 Dependencias:
     - validacao
+
+Contratos de entrada/saida:
+    - mostrar_menu_principal(opcoes): imprime opcoes.
+    - ler_opcao_menu(min_opcao, max_opcao): devolve inteiro valido no intervalo.
 
 Funcoes publicas:
     - mostrar_menu_principal
@@ -22,8 +26,13 @@ def mostrar_menu_principal(opcoes):
 
     Returns:
         None
+
+    Raises:
+        Nenhum.
+
+    Side Effects:
+        - Escreve no terminal.
     """
-    print("\nMenu Principal")
     for codigo, descricao in opcoes:
         print(f"{codigo}) {descricao}")
 
@@ -37,5 +46,11 @@ def ler_opcao_menu(min_opcao, max_opcao):
 
     Returns:
         int: Opcao escolhida.
+
+    Raises:
+        SystemExit: Quando utilizador pede saida em input.
+
+    Side Effects:
+        - Le input do terminal.
     """
     return pedir_inteiro_intervalo("Escolha uma opcao: ", min_opcao, max_opcao)
