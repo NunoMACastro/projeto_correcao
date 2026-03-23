@@ -4,14 +4,44 @@ Responsabilidade:
     Reunir funcoes de apresentacao e mensagens no terminal.
 
 Dependencias:
-    Nenhuma.
+    - os
+    - validacao
 
 Funcoes publicas:
+    - limpar_ecra
+    - aguardar_enter
     - mostrar_titulo
     - mostrar_regras
     - mostrar_mensagem_erro
     - mostrar_resumo
 """
+
+import os
+
+from validacao import terminar_se_comando_saida
+
+
+def limpar_ecra():
+    """Limpa o ecrã da consola de forma portavel.
+
+    Returns:
+        None
+    """
+    comando = "cls" if os.name == "nt" else "clear"
+    os.system(comando)
+
+
+def aguardar_enter(mensagem="Pressiona Enter para continuar..."):
+    """Pausa o fluxo ate o utilizador carregar Enter.
+
+    Args:
+        mensagem (str): Texto apresentado ao utilizador.
+
+    Returns:
+        None
+    """
+    texto = input(mensagem)
+    terminar_se_comando_saida(texto)
 
 
 def mostrar_titulo():
@@ -32,8 +62,11 @@ def mostrar_regras():
     print("\nRegras / Ajuda")
     print("1) Escolhe uma opcao numerica no menu.")
     print("2) Durante o jogo, responde com o numero da opcao correta.")
-    print("3) No fim, recebe resumo de pontuacao e podes voltar a jogar.")
-    print("4) Podes escrever 'sair' (ou '0') em qualquer input para terminar.")
+    print("3) Cada partida tem 10 perguntas.")
+    print("4) Tens 20 segundos por pergunta.")
+    print("5) A pontuacao por dificuldade esta sempre ativa (1/2/3).")
+    print("6) No fim, recebes resumo de pontuacao e podes voltar a jogar.")
+    print("7) Podes escrever 'sair' (ou '0') em qualquer input para terminar.")
 
 
 def mostrar_mensagem_erro(texto):

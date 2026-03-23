@@ -28,7 +28,9 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 - [x] Menu principal com opções obrigatórias:
   - [x] (1) Jogar
   - [x] (2) Regras / Ajuda
-  - [x] (3) Sair
+  - [x] (3) Top 10
+  - [x] (4) Campeonato
+  - [x] Saída por comando de prompt (`sair`/`0`)
 - [x] Modo de jogo:
   - [x] Escolher 10 perguntas aleatórias
   - [x] Mostrar pergunta e opções numeradas
@@ -54,7 +56,7 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 
 ### 2.3 Nível 3 (todos os opcionais implementados)
 
-- [x] A) Modo contra-relógio (X segundos por pergunta)
+- [x] A) Modo contra-relógio (20 segundos fixos por pergunta)
 - [x] B) Pontos por dificuldade (1/2/3)
 - [x] C) Modo campeonato (2 jogadores, melhor de 3 rondas)
 
@@ -95,12 +97,12 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 ```python
 {
     "nickname": "nuno",
-    "modo": "normal",  # normal | relogio | campeonato
+    "modo": "relogio",  # modo atual da sessao de jogo
     "config": {
         "num_perguntas": 10,
         "categoria": "todas",
         "dificuldade": "todas",
-        "tempo_limite": 12,
+        "tempo_limite": 20,
         "pontuacao_por_dificuldade": True,
         "mostrar_explicacao": "apos_resposta"
     },
@@ -122,7 +124,7 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
     {
         "nickname": "nuno",
         "data_iso": "2026-03-23T15:00:00",
-        "modo": "normal",
+        "modo": "relogio",
         "pontos": 8,
         "certas": 4,
         "erradas": 1,
@@ -193,7 +195,7 @@ Regras:
 - `ui.py`: impressão formatada e prompts reutilizáveis.
 - `json_store.py`: leitura/escrita segura de JSON.
 - `perguntas_service.py`: carga, validação, filtros e seleção de perguntas.
-- `jogo_service.py`: execução da sessão normal e contra-relógio.
+- `jogo_service.py`: execução da sessão com contra-relógio fixo.
 - `pontuacoes_service.py`: persistência e ranking Top 10.
 - `campeonato_service.py`: lógica melhor-de-3 para dois jogadores.
 - `validacao.py`: validações genéricas de input.
@@ -213,7 +215,7 @@ Exemplo:
 """jogo_service.py
 
 Responsabilidade:
-    Executar uma sessão de jogo (normal ou contra-relogio), processando
+    Executar uma sessão de jogo com contra-relogio fixo, processando
     perguntas, respostas e pontuacao.
 
 Dependencias:
@@ -288,7 +290,7 @@ Regra de projeto:
 | `guardar_resultado(resultado)`                              | `pontuacoes_service.py` | Persiste resultado no histórico.                           |
 | `obter_top10()`                                             | `pontuacoes_service.py` | Ordena e devolve 10 melhores resultados.                   |
 | `mostrar_top10()`                                           | `pontuacoes_service.py` | Imprime ranking no terminal.                               |
-| `jogar_campeonato(perguntas, config_base)`                  | `campeonato_service.py` | Coordena melhor de 3 rondas para 2 jogadores.              |
+| `jogar_campeonato(perguntas, config_base, jogador_1, jogador_2)` | `campeonato_service.py` | Coordena melhor de 3 rondas para 2 jogadores.         |
 | `jogar_ronda_campeonato(jogador, perguntas_ronda, config)`  | `campeonato_service.py` | Executa uma ronda para um jogador.                         |
 | `determinar_vencedor_campeonato(placar)`                    | `campeonato_service.py` | Decide vencedor final.                                     |
 
@@ -301,9 +303,8 @@ Regra de projeto:
 3. Mostra menu principal:
     - 1 Jogar
     - 2 Regras/Ajuda
-    - 3 Sair
-    - 4 Top 10
-    - 5 Modo Campeonato
+    - 3 Top 10
+    - 4 Modo Campeonato
 4. Se escolha inválida, mostrar erro e repetir.
 5. Em "Jogar":
     - pedir nickname
@@ -311,13 +312,13 @@ Regra de projeto:
     - usar 10 perguntas fixas
     - montar conjunto elegível
     - aplicar regra anti-repetição (sessão + global)
-    - iniciar sessão (normal ou contra-relógio)
+    - iniciar sessão com contra-relógio fixo (20s por pergunta)
 6. Para cada pergunta:
     - mostrar enunciado/opções
     - ler resposta com validação
     - verificar tempo (se modo relógio)
     - verificar acerto
-    - atribuir pontos (simples ou por dificuldade)
+    - atribuir pontos por dificuldade (1/2/3)
     - mostrar explicação, se existir
 7. No final da sessão:
     - calcular resumo
@@ -332,7 +333,7 @@ Regra de projeto:
     - cada ronda: dois jogadores respondem ao mesmo conjunto de perguntas
     - atualizar placar de rondas e pontos totais
     - declarar vencedor
-10. Em "Sair": terminar app sem crash.
+10. Em qualquer input: escrever `sair` ou `0` para terminar app sem crash.
 
 ---
 
@@ -391,8 +392,8 @@ Observação:
 
 ### Fase D - Nível 3 completo (Dias 6-7)
 
-- Modo contra-relógio.
-- Pontuação ponderada por dificuldade.
+- Modo contra-relógio fixo (20s).
+- Pontuação por dificuldade sempre ativa.
 - Campeonato melhor de 3.
 - Entregável: requisitos 5.3 A/B/C concluídos.
 
@@ -420,8 +421,8 @@ Observação:
 12. Filtro dificuldade: escolher `media` e receber apenas `media`.
 13. Opção `todas` no filtro: incluir universo completo.
 14. Explicação: mostrar quando campo existe; omitir sem crash quando não existe.
-15. Contra-relógio: responder após limite e validar contagem como errada.
-16. Pontuação por dificuldade: verificar valores 1/2/3.
+15. Contra-relógio: validar limite fixo de 20s e contagem como errada fora do tempo.
+16. Pontuação por dificuldade: verificar valores 1/2/3 sempre ativos.
 17. Campeonato: simular 3 rondas e confirmar vencedor correto.
 
 ---

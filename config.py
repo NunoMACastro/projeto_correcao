@@ -14,28 +14,26 @@ CAMINHO_PERGUNTAS = "perguntas.json"
 CAMINHO_PONTUACOES = "pontuacoes.json"
 CAMINHO_HISTORICO = "historico_perguntas.json"
 NUM_PERGUNTAS_FIXAS = 10
+TEMPO_LIMITE_FIXO = 20
 
 MENU_PRINCIPAL_OPCOES = [
     ("1", "Jogar"),
     ("2", "Regras / Ajuda"),
-    ("3", "Sair"),
-    ("4", "Top 10"),
-    ("5", "Campeonato"),
+    ("3", "Top 10"),
+    ("4", "Campeonato"),
 ]
 
 LIMITES = {
     "nickname_min": 1,
     "nickname_max": 20,
-    "tempo_limite_min": 5,
-    "tempo_limite_max": 60,
 }
 
 CONFIG_PADRAO = {
     "num_perguntas": NUM_PERGUNTAS_FIXAS,
     "categoria": "todas",
     "dificuldade": "todas",
-    "tempo_limite": 12,
-    "modo_relogio": False,
-    "pontuacao_por_dificuldade": False,
+    "tempo_limite": TEMPO_LIMITE_FIXO,
+    "modo_relogio": True,
+    "pontuacao_por_dificuldade": True,
     "mostrar_explicacao": "apos_resposta",
 }

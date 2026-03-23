@@ -22,7 +22,13 @@ Funcoes publicas:
     - executar_modo_campeonato
 """
 
-from config import CONFIG_PADRAO, LIMITES, MENU_PRINCIPAL_OPCOES, NUM_PERGUNTAS_FIXAS
+from config import (
+    CONFIG_PADRAO,
+    LIMITES,
+    MENU_PRINCIPAL_OPCOES,
+    NUM_PERGUNTAS_FIXAS,
+    TEMPO_LIMITE_FIXO,
+)
 from campeonato_service import jogar_campeonato
 from jogo_service import jogar_sessao
 from menu import ler_opcao_menu, mostrar_menu_principal
@@ -35,7 +41,14 @@ from perguntas_service import (
     reiniciar_historico_se_necessario,
     selecionar_perguntas_com_historico,
 )
-from ui import mostrar_mensagem_erro, mostrar_regras, mostrar_resumo, mostrar_titulo
+from ui import (
+    aguardar_enter,
+    limpar_ecra,
+    mostrar_mensagem_erro,
+    mostrar_regras,
+    mostrar_resumo,
+    mostrar_titulo,
+)
 from validacao import pedir_confirmacao, pedir_inteiro_intervalo, pedir_nickname
 
 
@@ -63,26 +76,15 @@ def escolher_filtro(rotulo, valores):
 
 
 def configurar_nivel_3():
-    """Constroi configuracao da sessao para funcionalidades de Nivel 3.
+    """Constroi configuracao fixa da sessao para o jogo.
 
     Returns:
-        dict: Flags e parametros de contra-relogio e pontuacao por dificuldade.
+        dict: Configuracao com contra-relogio a 20s e pontuacao por dificuldade.
     """
     config = dict(CONFIG_PADRAO)
-    usar_relogio = pedir_confirmacao("Ativar modo contra-relogio? (s/n): ")
-    config["modo_relogio"] = usar_relogio
-    if usar_relogio:
-        config["tempo_limite"] = pedir_inteiro_intervalo(
-            prompt=(
-                "Tempo por pergunta "
-                f"({LIMITES['tempo_limite_min']}-{LIMITES['tempo_limite_max']}s): "
-            ),
-            minimo=LIMITES["tempo_limite_min"],
-            maximo=LIMITES["tempo_limite_max"],
-        )
-
-    usar_pesos = pedir_confirmacao("Ativar pontuacao por dificuldade? (s/n): ")
-    config["pontuacao_por_dificuldade"] = usar_pesos
+    config["modo_relogio"] = True
+    config["tempo_limite"] = TEMPO_LIMITE_FIXO
+    config["pontuacao_por_dificuldade"] = True
     return config
 
 
@@ -95,6 +97,7 @@ def executar_modo_jogo(perguntas):
     Returns:
         None
     """
+    limpar_ecra()
     nickname = pedir_nickname(
         minimo=LIMITES["nickname_min"],
         maximo=LIMITES["nickname_max"],
@@ -124,6 +127,10 @@ def executar_modo_jogo(perguntas):
         ]
         ids_historico_global = reiniciar_historico_se_necessario(ids_elegiveis)
         print(f"Esta partida tera sempre {NUM_PERGUNTAS_FIXAS} perguntas.")
+        print(
+            f"Tempo por pergunta: {TEMPO_LIMITE_FIXO}s | "
+            "Pontuacao por dificuldade: ativa."
+        )
         selecionadas = selecionar_perguntas_com_historico(
             perguntas=perguntas_filtradas,
             quantidade=NUM_PERGUNTAS_FIXAS,
@@ -141,6 +148,7 @@ def executar_modo_jogo(perguntas):
         guardar_resultado(resultado)
         atualizar_historico_global(resultado.get("ids_usadas_sessao", []))
         mostrar_resumo(resultado)
+        aguardar_enter("Pressiona Enter para continuar... ")
 
         quer_rejogar = pedir_confirmacao("Queres jogar novamente? (s/n): ")
         if not quer_rejogar:
@@ -156,6 +164,7 @@ def executar_modo_campeonato(perguntas):
     Returns:
         None
     """
+    limpar_ecra()
     print("\nModo Campeonato")
     jogador_1 = pedir_nickname(
         minimo=LIMITES["nickname_min"],
@@ -181,6 +190,10 @@ def executar_modo_campeonato(perguntas):
         return
 
     print(f"Cada ronda do campeonato tera {NUM_PERGUNTAS_FIXAS} perguntas.")
+    print(
+        f"Tempo por pergunta: {TEMPO_LIMITE_FIXO}s | "
+        "Pontuacao por dificuldade: ativa."
+    )
     config_campeonato = configurar_nivel_3()
     config_campeonato["num_perguntas"] = NUM_PERGUNTAS_FIXAS
     config_campeonato["categoria"] = "todas"
@@ -202,6 +215,7 @@ def executar_modo_campeonato(perguntas):
         f"{jogador_2}: {placar['jogador_2']['pontos_totais']}"
     )
     print(f"Vencedor: {placar['vencedor']}")
+    aguardar_enter("Pressiona Enter para voltar ao menu... ")
 
 
 def ciclo_menu_principal(perguntas):
@@ -214,6 +228,7 @@ def ciclo_menu_principal(perguntas):
         None
     """
     while True:
+        limpar_ecra()
         mostrar_titulo()
         print(f"Perguntas carregadas: {len(perguntas)}")
         mostrar_menu_principal(MENU_PRINCIPAL_OPCOES)
@@ -222,13 +237,14 @@ def ciclo_menu_principal(perguntas):
         if opcao == 1:
             executar_modo_jogo(perguntas)
         elif opcao == 2:
+            limpar_ecra()
             mostrar_regras()
+            aguardar_enter("Pressiona Enter para voltar ao menu... ")
         elif opcao == 3:
-            print("A terminar aplicacao.")
-            break
-        elif opcao == 4:
+            limpar_ecra()
             mostrar_top10()
-        elif opcao == 5:
+            aguardar_enter("Pressiona Enter para voltar ao menu... ")
+        elif opcao == 4:
             executar_modo_campeonato(perguntas)
 
 

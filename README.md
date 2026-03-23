@@ -30,8 +30,10 @@ python3 main.py
 - Menu principal com:
   - Jogar
   - Regras / Ajuda
-  - Sair
+  - Top 10
+  - Campeonato
 - Jogo com 10 perguntas aleatorias por partida
+- Tempo fixo de 20 segundos por pergunta
 - Validacao robusta de input
 - Feedback de acerto/erro por pergunta
 - Atualizacao de pontuacao
@@ -51,8 +53,8 @@ python3 main.py
 
 ### Nivel 3
 
-- Modo contra-relogio por pergunta
-- Pontuacao por dificuldade:
+- Modo contra-relogio fixo (20s por pergunta)
+- Pontuacao por dificuldade sempre ativa:
   - facil = 1
   - media = 2
   - dificil = 3
@@ -60,5 +62,5 @@ python3 main.py
 
 ## Notas
 
-- O contra-relogio esta implementado em modo funcional: resposta acima do tempo limite conta como errada.
+- O contra-relogio esta implementado em modo funcional: resposta acima de 20s conta como errada.
 - Podes escrever `sair` ou `0` em qualquer input para terminar a app de imediato.
