@@ -60,7 +60,7 @@ def terminar_se_comando_saida(texto):
 
     comando = str(texto).strip().lower()
     if comando in ("sair", "exit", "quit", "q", "0"):
-        print("A terminar aplicacao por comando do utilizador.")
+        print("A terminar aplicação por comando do utilizador.")
         raise SystemExit(0)
 
 
@@ -90,7 +90,7 @@ def pedir_inteiro_intervalo(prompt, minimo, maximo):
             print("Entrada vazia. Tenta novamente.")
             continue
         if not texto.isdigit():
-            print("Entrada invalida. Introduz apenas numeros.")
+            print("Entrada inválida. Introduz apenas números.")
             continue
 
         valor = int(texto)
@@ -101,13 +101,13 @@ def pedir_inteiro_intervalo(prompt, minimo, maximo):
 
 
 def pedir_confirmacao(prompt):
-    """Pede confirmacao do tipo sim/nao.
+    """Pede confirmacao do tipo sim/não.
 
     Args:
         prompt (str): Texto da pergunta.
 
     Returns:
-        bool: True para sim, False para nao.
+        bool: True para sim, False para não.
 
     Raises:
         SystemExit: Quando utilizador pede saida.
@@ -125,11 +125,11 @@ def pedir_confirmacao(prompt):
         if texto in ("n", "nao", "não", "no"):
             return False
 
-        print("Resposta invalida. Usa 's' para sim ou 'n' para nao.")
+        print("Resposta inválida. Usa 's' para sim ou 'n' para não.")
 
 
 def pedir_nickname(minimo=1, maximo=20):
-    """Pede nickname nao vazio e dentro dos limites configurados.
+    """Pede nickname não vazio e dentro dos limites configurados.
 
     Args:
         minimo (int): Tamanho minimo permitido.
@@ -151,6 +151,6 @@ def pedir_nickname(minimo=1, maximo=20):
 
         tamanho = len(nome)
         if tamanho < int(minimo) or tamanho > int(maximo):
-            print(f"Nickname deve ter entre {minimo} e {maximo} caracteres.")
+            print(f"O nickname deve ter entre {minimo} e {maximo} caracteres.")
             continue
         return nome

@@ -53,4 +53,4 @@ def ler_opcao_menu(min_opcao, max_opcao):
     Side Effects:
         - Le input do terminal.
     """
-    return pedir_inteiro_intervalo("Escolha uma opcao: ", min_opcao, max_opcao)
+    return pedir_inteiro_intervalo("Escolha uma opção: ", min_opcao, max_opcao)

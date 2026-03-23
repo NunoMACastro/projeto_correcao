@@ -1,6 +1,6 @@
 [
   {
-    "timestamp_iso": "2026-03-23T19:54:20",
+    "timestamp_iso": "2026-03-23T20:06:30",
     "nivel": "INFO",
     "evento": "app_inicio",
     "contexto": {
@@ -8,7 +8,7 @@
     }
   },
   {
-    "timestamp_iso": "2026-03-23T19:54:20",
+    "timestamp_iso": "2026-03-23T20:06:30",
     "nivel": "INFO",
     "evento": "carga_perguntas_concluida",
     "contexto": {
@@ -18,33 +18,7 @@
     }
   },
   {
-    "timestamp_iso": "2026-03-23T19:54:20",
-    "nivel": "INFO",
-    "evento": "app_fim",
-    "contexto": {
-      "motivo": "encerramento"
-    }
-  },
-  {
-    "timestamp_iso": "2026-03-23T19:54:36",
-    "nivel": "INFO",
-    "evento": "app_inicio",
-    "contexto": {
-      "componente": "quiz_python"
-    }
-  },
-  {
-    "timestamp_iso": "2026-03-23T19:54:36",
-    "nivel": "INFO",
-    "evento": "carga_perguntas_concluida",
-    "contexto": {
-      "total": 48,
-      "validas": 48,
-      "invalidas": 0
-    }
-  },
-  {
-    "timestamp_iso": "2026-03-23T19:54:36",
+    "timestamp_iso": "2026-03-23T20:06:30",
     "nivel": "INFO",
     "evento": "app_fim",
     "contexto": {

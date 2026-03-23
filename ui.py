@@ -8,7 +8,7 @@ Dependencias:
     - validacao
 
 Contratos de entrada/saida:
-    - Funcoes imprimem mensagens no terminal e nao devolvem dados de negocio.
+    - Funcoes imprimem mensagens no terminal e não devolvem dados de negocio.
 
 Funcoes publicas:
     - limpar_ecra
@@ -195,17 +195,17 @@ def mostrar_regras():
         - Escreve no terminal.
     """
     print("\nRegras / Ajuda")
-    print("1) Escolhe uma opcao numerica no menu.")
-    print("2) Durante o jogo, responde com o numero da opcao correta.")
-    print("3) Cada partida tem 10 perguntas aleatorias.")
+    print("1) Escolhe uma opção numérica no menu.")
+    print("2) Durante o jogo, responde com o número da opção correta.")
+    print("3) Cada partida tem 10 perguntas aleatórias.")
     print("4) Tens 20 segundos por pergunta.")
-    print("5) Pontuacao por dificuldade esta sempre ativa (1/2/3).")
+    print("5) Pontuação por dificuldade está sempre ativa (1/2/3).")
     print("6) No fim, recebes resumo e podes voltar a jogar.")
-    print("7) Podes escrever 'sair' (ou '0') em qualquer input para terminar.")
+    print("7) Podes escrever 'sair' (ou '0') em qualquer entrada para terminar.")
 
 
 def mostrar_resumo(resultado):
-    """Mostra resumo final de uma sessao.
+    """Mostra resumo final de uma sessão.
 
     Args:
         resultado (dict): Dicionario com pontos, certas, erradas e percentagem.

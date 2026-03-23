@@ -1,71 +1,111 @@
 [
   {
     "id": "p001",
-    "pergunta": "Qual e a capital de Portugal?",
-    "opcoes": ["Lisboa", "Porto", "Coimbra", "Faro"],
+    "pergunta": "Qual é a capital de Portugal?",
+    "opcoes": [
+      "Lisboa",
+      "Porto",
+      "Coimbra",
+      "Faro"
+    ],
     "resposta": 0,
     "categoria": "geografia",
     "dificuldade": "dificil",
-    "explicacao": "Lisboa e a capital oficial de Portugal."
+    "explicacao": "Lisboa é a capital oficial de Portugal."
   },
   {
     "id": "p002",
-    "pergunta": "Qual e a capital de Franca?",
-    "opcoes": ["Lyon", "Paris", "Marselha", "Toulouse"],
+    "pergunta": "Qual é a capital de França?",
+    "opcoes": [
+      "Lyon",
+      "Paris",
+      "Marselha",
+      "Toulouse"
+    ],
     "resposta": "Paris",
     "categoria": "geografia",
     "dificuldade": "dificil",
-    "explicacao": "Paris e a capital de Franca."
+    "explicacao": "Paris é a capital de França."
   },
   {
     "id": "p003",
     "pergunta": "Em que continente fica o Egito?",
-    "opcoes": ["Asia", "Europa", "Africa", "America"],
-    "resposta": "Africa",
+    "opcoes": [
+      "Ásia",
+      "Europa",
+      "África",
+      "América"
+    ],
+    "resposta": "África",
     "categoria": "geografia",
     "dificuldade": "dificil",
-    "explicacao": "O Egito fica no norte de Africa."
+    "explicacao": "O Egito fica no norte de África."
   },
   {
     "id": "p004",
-    "pergunta": "Qual e o maior pais do mundo em area?",
-    "opcoes": ["Russia", "Canada", "China", "Estados Unidos"],
+    "pergunta": "Qual é o maior país do mundo em área?",
+    "opcoes": [
+      "Rússia",
+      "Canadá",
+      "China",
+      "Estados Unidos"
+    ],
     "resposta": 0,
     "categoria": "geografia",
     "dificuldade": "media",
-    "explicacao": "A Russia e o maior pais em area."
+    "explicacao": "A Rússia é o maior país em área."
   },
   {
     "id": "p005",
     "pergunta": "Qual oceano banha a costa oeste de Portugal?",
-    "opcoes": ["Pacifico", "Artico", "Atlantico", "Indico"],
-    "resposta": "Atlantico",
+    "opcoes": [
+      "Pacífico",
+      "Ártico",
+      "Atlântico",
+      "Índico"
+    ],
+    "resposta": "Atlântico",
     "categoria": "geografia",
     "dificuldade": "dificil",
-    "explicacao": "Portugal e banhado pelo oceano Atlantico."
+    "explicacao": "Portugal é banhado pelo oceano Atlântico."
   },
   {
     "id": "p006",
-    "pergunta": "Qual e o rio tradicionalmente ensinado como o mais longo do mundo?",
-    "opcoes": ["Nilo", "Amazonas", "Yangtze", "Mississipi"],
+    "pergunta": "Qual é o rio tradicionalmente ensinado como o mais longo do mundo?",
+    "opcoes": [
+      "Nilo",
+      "Amazonas",
+      "Yangtze",
+      "Mississipi"
+    ],
     "resposta": 0,
     "categoria": "geografia",
     "dificuldade": "media",
-    "explicacao": "Em muitos curriculos escolares, o Nilo e indicado como o mais longo."
+    "explicacao": "Em muitos currículos escolares, o Nilo é indicado como o mais longo."
   },
   {
     "id": "p007",
-    "pergunta": "Quanto e 7 x 8?",
-    "opcoes": ["56", "54", "58", "64"],
+    "pergunta": "Quanto é 7 x 8?",
+    "opcoes": [
+      "56",
+      "54",
+      "58",
+      "64"
+    ],
     "resposta": 0,
     "categoria": "matematica",
     "dificuldade": "dificil",
-    "explicacao": "7 multiplicado por 8 e igual a 56."
+    "explicacao": "7 multiplicado por 8 é igual a 56."
   },
   {
     "id": "p008",
-    "pergunta": "Quanto e 15 + 27?",
-    "opcoes": ["40", "41", "42", "43"],
+    "pergunta": "Quanto é 15 + 27?",
+    "opcoes": [
+      "40",
+      "41",
+      "42",
+      "43"
+    ],
     "resposta": "42",
     "categoria": "matematica",
     "dificuldade": "dificil",
@@ -73,8 +113,13 @@
   },
   {
     "id": "p009",
-    "pergunta": "Qual e a raiz quadrada de 81?",
-    "opcoes": ["7", "8", "9", "10"],
+    "pergunta": "Qual é a raiz quadrada de 81?",
+    "opcoes": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
     "resposta": "9",
     "categoria": "matematica",
     "dificuldade": "dificil",
@@ -82,8 +127,13 @@
   },
   {
     "id": "p010",
-    "pergunta": "Quanto e 2 elevado a 5?",
-    "opcoes": ["32", "16", "25", "64"],
+    "pergunta": "Quanto é 2 elevado a 5?",
+    "opcoes": [
+      "32",
+      "16",
+      "25",
+      "64"
+    ],
     "resposta": 0,
     "categoria": "matematica",
     "dificuldade": "media",
@@ -91,44 +141,69 @@
   },
   {
     "id": "p011",
-    "pergunta": "Qual destes numeros e primo?",
-    "opcoes": ["21", "27", "29", "33"],
+    "pergunta": "Qual destes números é primo?",
+    "opcoes": [
+      "21",
+      "27",
+      "29",
+      "33"
+    ],
     "resposta": "29",
     "categoria": "matematica",
     "dificuldade": "media",
-    "explicacao": "29 e divisivel apenas por 1 e por ele proprio."
+    "explicacao": "29 é divisível apenas por 1 e por ele próprio."
   },
   {
     "id": "p012",
-    "pergunta": "Qual e a area de um quadrado de lado 6?",
-    "opcoes": ["12", "24", "30", "36"],
+    "pergunta": "Qual é a área de um quadrado de lado 6?",
+    "opcoes": [
+      "12",
+      "24",
+      "30",
+      "36"
+    ],
     "resposta": "36",
     "categoria": "matematica",
     "dificuldade": "media",
-    "explicacao": "Area = lado x lado = 6 x 6 = 36."
+    "explicacao": "Área = lado x lado = 6 x 6 = 36."
   },
   {
     "id": "p013",
-    "pergunta": "Em que ano comecou a Revolucao Francesa?",
-    "opcoes": ["1776", "1789", "1815", "1914"],
+    "pergunta": "Em que ano começou a Revolução Francesa?",
+    "opcoes": [
+      "1776",
+      "1789",
+      "1815",
+      "1914"
+    ],
     "resposta": "1789",
     "categoria": "historia",
     "dificuldade": "media",
-    "explicacao": "A Revolucao Francesa comecou em 1789."
+    "explicacao": "A Revolução Francesa começou em 1789."
   },
   {
     "id": "p014",
     "pergunta": "Em que ano aconteceu o 25 de Abril em Portugal?",
-    "opcoes": ["1968", "1974", "1986", "1999"],
+    "opcoes": [
+      "1968",
+      "1974",
+      "1986",
+      "1999"
+    ],
     "resposta": "1974",
     "categoria": "historia",
     "dificuldade": "dificil",
-    "explicacao": "A Revolucao dos Cravos foi em 1974."
+    "explicacao": "A Revolução dos Cravos foi em 1974."
   },
   {
     "id": "p015",
     "pergunta": "Quem foi o primeiro homem a pisar a Lua?",
-    "opcoes": ["Neil Armstrong", "Yuri Gagarin", "Buzz Aldrin", "Michael Collins"],
+    "opcoes": [
+      "Neil Armstrong",
+      "Yuri Gagarin",
+      "Buzz Aldrin",
+      "Michael Collins"
+    ],
     "resposta": "Neil Armstrong",
     "categoria": "historia",
     "dificuldade": "dificil",
@@ -137,7 +212,12 @@
   {
     "id": "p016",
     "pergunta": "Em que ano terminou a Segunda Guerra Mundial?",
-    "opcoes": ["1945", "1939", "1942", "1950"],
+    "opcoes": [
+      "1945",
+      "1939",
+      "1942",
+      "1950"
+    ],
     "resposta": 0,
     "categoria": "historia",
     "dificuldade": "media",
@@ -145,17 +225,27 @@
   },
   {
     "id": "p017",
-    "pergunta": "Em que ano foi proclamada a independencia do Brasil?",
-    "opcoes": ["1808", "1822", "1889", "1891"],
+    "pergunta": "Em que ano foi proclamada a independência do Brasil?",
+    "opcoes": [
+      "1808",
+      "1822",
+      "1889",
+      "1891"
+    ],
     "resposta": "1822",
     "categoria": "historia",
     "dificuldade": "media",
-    "explicacao": "A independencia do Brasil foi em 1822."
+    "explicacao": "A independência do Brasil foi em 1822."
   },
   {
     "id": "p018",
-    "pergunta": "Quem abriu o caminho maritimo para a India por Portugal?",
-    "opcoes": ["Pedro Alvares Cabral", "Afonso de Albuquerque", "Vasco da Gama", "Bartolomeu Dias"],
+    "pergunta": "Quem abriu o caminho marítimo para a Índia por Portugal?",
+    "opcoes": [
+      "Pedro Álvares Cabral",
+      "Afonso de Albuquerque",
+      "Vasco da Gama",
+      "Bartolomeu Dias"
+    ],
     "resposta": "Vasco da Gama",
     "categoria": "historia",
     "dificuldade": "media",
@@ -163,62 +253,97 @@
   },
   {
     "id": "p019",
-    "pergunta": "Qual e a formula quimica da agua?",
-    "opcoes": ["H2O", "CO2", "O2", "NaCl"],
+    "pergunta": "Qual é a fórmula química da água?",
+    "opcoes": [
+      "H2O",
+      "CO2",
+      "O2",
+      "NaCl"
+    ],
     "resposta": 0,
     "categoria": "ciencia",
     "dificuldade": "facil",
-    "explicacao": "A agua e composta por dois atomos de hidrogenio e um de oxigenio."
+    "explicacao": "A água é composta por dois átomos de hidrogénio e um de oxigénio."
   },
   {
     "id": "p020",
-    "pergunta": "Qual e o planeta conhecido como planeta vermelho?",
-    "opcoes": ["Venus", "Marte", "Jupiter", "Mercurio"],
+    "pergunta": "Qual é o planeta conhecido como planeta vermelho?",
+    "opcoes": [
+      "Vénus",
+      "Marte",
+      "Júpiter",
+      "Mercúrio"
+    ],
     "resposta": "Marte",
     "categoria": "ciencia",
     "dificuldade": "facil",
-    "explicacao": "Marte e chamado planeta vermelho devido ao oxido de ferro na superficie."
+    "explicacao": "Marte é chamado planeta vermelho devido ao óxido de ferro na superfície."
   },
   {
     "id": "p021",
-    "pergunta": "Qual orgao bombeia o sangue no corpo humano?",
-    "opcoes": ["Figado", "Pulmao", "Coracao", "Rim"],
-    "resposta": "Coracao",
+    "pergunta": "Qual órgão bombeia o sangue no corpo humano?",
+    "opcoes": [
+      "Fígado",
+      "Pulmão",
+      "Coração",
+      "Rim"
+    ],
+    "resposta": "Coração",
     "categoria": "ciencia",
     "dificuldade": "facil",
-    "explicacao": "O coracao e responsavel pelo bombeamento do sangue."
+    "explicacao": "O coração é responsável pelo bombeamento do sangue."
   },
   {
     "id": "p022",
-    "pergunta": "Que gas e essencial para a respiracao humana?",
-    "opcoes": ["Oxigenio", "Nitrogenio", "Helio", "Argonio"],
+    "pergunta": "Que gás é essencial para a respiração humana?",
+    "opcoes": [
+      "Oxigénio",
+      "Nitrogénio",
+      "Hélio",
+      "Argónio"
+    ],
     "resposta": 0,
     "categoria": "ciencia",
     "dificuldade": "facil",
-    "explicacao": "O oxigenio e usado na respiracao celular."
+    "explicacao": "O oxigénio é usado na respiração celular."
   },
   {
     "id": "p023",
-    "pergunta": "Qual e a unidade SI da corrente eletrica?",
-    "opcoes": ["Volt", "Ohm", "Ampere", "Watt"],
-    "resposta": "Ampere",
+    "pergunta": "Qual é a unidade SI da corrente elétrica?",
+    "opcoes": [
+      "Volt",
+      "Ohm",
+      "Ampère",
+      "Watt"
+    ],
+    "resposta": "Ampère",
     "categoria": "ciencia",
     "dificuldade": "media",
-    "explicacao": "A unidade de corrente eletrica e o ampere (A)."
+    "explicacao": "A unidade de corrente elétrica é o ampère (A)."
   },
   {
     "id": "p024",
-    "pergunta": "Qual estrela esta no centro do Sistema Solar?",
-    "opcoes": ["Sirius", "Polaris", "Sol", "Betelgeuse"],
+    "pergunta": "Qual estrela está no centro do Sistema Solar?",
+    "opcoes": [
+      "Sirius",
+      "Polaris",
+      "Sol",
+      "Betelgeuse"
+    ],
     "resposta": "Sol",
     "categoria": "ciencia",
     "dificuldade": "facil",
-    "explicacao": "O Sol e a estrela central do Sistema Solar."
+    "explicacao": "O Sol é a estrela central do Sistema Solar."
   },
   {
     "id": "p025",
-    "pergunta": "Que linguagem esta a ser usada neste projeto?",
-    "opcoes": ["Java", "Python", "C#", "Ruby"],
+    "pergunta": "Que linguagem está a ser usada neste projeto?",
+    "opcoes": [
+      "Java",
+      "Python",
+      "C#",
+      "Ruby"
+    ],
     "resposta": "Python",
     "categoria": "programacao",
     "dificuldade": "facil",
@@ -227,70 +352,110 @@
   {
     "id": "p026",
     "pergunta": "Qual palavra-chave inicia um ciclo sobre uma lista em Python?",
-    "opcoes": ["while", "for", "loop", "iterate"],
+    "opcoes": [
+      "while",
+      "for",
+      "loop",
+      "iterate"
+    ],
     "resposta": "for",
     "categoria": "programacao",
     "dificuldade": "facil",
-    "explicacao": "A palavra-chave 'for' percorre iteraveis em Python."
+    "explicacao": "A palavra-chave 'for' percorre iteráveis em Python."
   },
   {
     "id": "p027",
     "pergunta": "Que estrutura de dados guarda pares chave-valor em Python?",
-    "opcoes": ["lista", "tuplo", "dicionario", "string"],
-    "resposta": "dicionario",
+    "opcoes": [
+      "lista",
+      "tuplo",
+      "dicionário",
+      "string"
+    ],
+    "resposta": "dicionário",
     "categoria": "programacao",
     "dificuldade": "facil",
-    "explicacao": "Dicionarios guardam pares chave-valor."
+    "explicacao": "Dicionários guardam pares chave-valor."
   },
   {
     "id": "p028",
-    "pergunta": "Qual e a extensao tipica de um ficheiro JSON?",
-    "opcoes": [".txt", ".py", ".json", ".csv"],
+    "pergunta": "Qual é a extensão típica de um ficheiro JSON?",
+    "opcoes": [
+      ".txt",
+      ".py",
+      ".json",
+      ".csv"
+    ],
     "resposta": ".json",
     "categoria": "programacao",
     "dificuldade": "facil",
-    "explicacao": "Ficheiros JSON usam extensao .json."
+    "explicacao": "Ficheiros JSON usam extensão .json."
   },
   {
     "id": "p029",
-    "pergunta": "Que funcao devolve o tamanho de uma lista em Python?",
-    "opcoes": ["size", "count", "len", "length"],
+    "pergunta": "Que função devolve o tamanho de uma lista em Python?",
+    "opcoes": [
+      "size",
+      "count",
+      "len",
+      "length"
+    ],
     "resposta": "len",
     "categoria": "programacao",
     "dificuldade": "facil",
-    "explicacao": "A funcao built-in len devolve o tamanho de colecoes."
+    "explicacao": "A função built-in len devolve o tamanho de coleções."
   },
   {
     "id": "p030",
-    "pergunta": "Que funcao converte uma string para inteiro em Python?",
-    "opcoes": ["float", "int", "str", "bool"],
+    "pergunta": "Que função converte uma string para inteiro em Python?",
+    "opcoes": [
+      "float",
+      "int",
+      "str",
+      "bool"
+    ],
     "resposta": "int",
     "categoria": "programacao",
     "dificuldade": "facil",
-    "explicacao": "int('10') converte texto numerico para inteiro."
+    "explicacao": "int('10') converte texto numérico para inteiro."
   },
   {
     "id": "p031",
-    "pergunta": "Quem escreveu 'Os Lusiadas'?",
-    "opcoes": ["Fernando Pessoa", "Luis de Camoes", "Eca de Queiros", "Sophia de Mello Breyner"],
-    "resposta": "Luis de Camoes",
+    "pergunta": "Quem escreveu 'Os Lusíadas'?",
+    "opcoes": [
+      "Fernando Pessoa",
+      "Luís de Camões",
+      "Eça de Queirós",
+      "Sophia de Mello Breyner"
+    ],
+    "resposta": "Luís de Camões",
     "categoria": "cultura_geral",
     "dificuldade": "media",
-    "explicacao": "'Os Lusiadas' e uma obra epica de Luis de Camoes."
+    "explicacao": "'Os Lusíadas' é uma obra épica de Luís de Camões."
   },
   {
     "id": "p032",
-    "pergunta": "Qual e a moeda oficial da maior parte da zona euro?",
-    "opcoes": ["Dolar", "Libra", "Euro", "Franco"],
+    "pergunta": "Qual é a moeda oficial da maior parte da zona euro?",
+    "opcoes": [
+      "Dólar",
+      "Libra",
+      "Euro",
+      "Franco"
+    ],
     "resposta": "Euro",
     "categoria": "cultura_geral",
     "dificuldade": "facil",
-    "explicacao": "O euro e a moeda comum de varios paises europeus."
+    "explicacao": "O euro é a moeda comum de vários países europeus."
   },
   {
     "id": "p033",
     "pergunta": "Quantos dias tem uma semana?",
-    "opcoes": ["5", "6", "7", "8"],
+    "opcoes": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
     "resposta": "7",
     "categoria": "cultura_geral",
     "dificuldade": "facil",
@@ -299,52 +464,82 @@
   {
     "id": "p034",
     "pergunta": "Que instrumento musical tem normalmente 6 cordas?",
-    "opcoes": ["Viola", "Guitarra", "Piano", "Flauta"],
+    "opcoes": [
+      "Viola",
+      "Guitarra",
+      "Piano",
+      "Flauta"
+    ],
     "resposta": "Guitarra",
     "categoria": "cultura_geral",
     "dificuldade": "facil",
-    "explicacao": "A guitarra classica e eletrica tem normalmente 6 cordas."
+    "explicacao": "A guitarra clássica e elétrica tem normalmente 6 cordas."
   },
   {
     "id": "p035",
-    "pergunta": "Qual e o idioma oficial do Brasil?",
-    "opcoes": ["Espanhol", "Portugues", "Ingles", "Frances"],
-    "resposta": "Portugues",
+    "pergunta": "Qual é o idioma oficial do Brasil?",
+    "opcoes": [
+      "Espanhol",
+      "Português",
+      "Inglês",
+      "Francês"
+    ],
+    "resposta": "Português",
     "categoria": "cultura_geral",
     "dificuldade": "facil",
-    "explicacao": "O idioma oficial do Brasil e o portugues."
+    "explicacao": "O idioma oficial do Brasil é o português."
   },
   {
     "id": "p036",
     "pergunta": "Quantos meses tem um ano?",
-    "opcoes": ["10", "11", "12", "13"],
+    "opcoes": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
     "resposta": "12",
     "categoria": "cultura_geral",
     "dificuldade": "facil",
-    "explicacao": "Um ano do calendario gregoriano tem 12 meses."
+    "explicacao": "Um ano do calendário gregoriano tem 12 meses."
   },
   {
     "id": "p037",
-    "pergunta": "Qual e a capital de Espanha?",
-    "opcoes": ["Barcelona", "Madrid", "Valencia", "Sevilha"],
+    "pergunta": "Qual é a capital de Espanha?",
+    "opcoes": [
+      "Barcelona",
+      "Madrid",
+      "Valencia",
+      "Sevilha"
+    ],
     "resposta": "Madrid",
     "categoria": "geografia",
     "dificuldade": "facil",
-    "explicacao": "Madrid e a capital de Espanha."
+    "explicacao": "Madrid é a capital de Espanha."
   },
   {
     "id": "p038",
-    "pergunta": "Qual e a capital de Italia?",
-    "opcoes": ["Milan", "Roma", "Napoles", "Turim"],
+    "pergunta": "Qual é a capital de Itália?",
+    "opcoes": [
+      "Milão",
+      "Roma",
+      "Nápoles",
+      "Turim"
+    ],
     "resposta": "Roma",
     "categoria": "geografia",
     "dificuldade": "facil",
-    "explicacao": "Roma e a capital de Italia."
+    "explicacao": "Roma é a capital de Itália."
   },
   {
     "id": "p039",
-    "pergunta": "Quanto e 9 x 9?",
-    "opcoes": ["72", "81", "90", "99"],
+    "pergunta": "Quanto é 9 x 9?",
+    "opcoes": [
+      "72",
+      "81",
+      "90",
+      "99"
+    ],
     "resposta": "81",
     "categoria": "matematica",
     "dificuldade": "facil",
@@ -352,8 +547,13 @@
   },
   {
     "id": "p040",
-    "pergunta": "Quanto e 144 dividido por 12?",
-    "opcoes": ["10", "11", "12", "13"],
+    "pergunta": "Quanto é 144 dividido por 12?",
+    "opcoes": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
     "resposta": "12",
     "categoria": "matematica",
     "dificuldade": "facil",
@@ -362,7 +562,12 @@
   {
     "id": "p041",
     "pergunta": "Em que ano caiu o Muro de Berlim?",
-    "opcoes": ["1987", "1988", "1989", "1991"],
+    "opcoes": [
+      "1987",
+      "1988",
+      "1989",
+      "1991"
+    ],
     "resposta": "1989",
     "categoria": "historia",
     "dificuldade": "media",
@@ -370,53 +575,83 @@
   },
   {
     "id": "p042",
-    "pergunta": "Em que ano caiu o Imperio Romano do Ocidente?",
-    "opcoes": ["410", "476", "622", "800"],
+    "pergunta": "Em que ano caiu o Império Romano do Ocidente?",
+    "opcoes": [
+      "410",
+      "476",
+      "622",
+      "800"
+    ],
     "resposta": "476",
     "categoria": "historia",
     "dificuldade": "dificil",
-    "explicacao": "A data convencional e 476 d.C."
+    "explicacao": "A data convencional é 476 d.C."
   },
   {
     "id": "p043",
     "pergunta": "Qual processo permite as plantas produzir alimento com luz?",
-    "opcoes": ["Respiracao", "Fermentacao", "Fotossintese", "Digestao"],
-    "resposta": "Fotossintese",
+    "opcoes": [
+      "Respiração",
+      "Fermentação",
+      "Fotossíntese",
+      "Digestão"
+    ],
+    "resposta": "Fotossíntese",
     "categoria": "ciencia",
     "dificuldade": "media",
-    "explicacao": "A fotossintese converte energia luminosa em energia quimica."
+    "explicacao": "A fotossíntese converte energia luminosa em energia química."
   },
   {
     "id": "p044",
-    "pergunta": "A que temperatura aproximada (em Celsius) a agua congela ao nivel do mar?",
-    "opcoes": ["0", "10", "32", "100"],
+    "pergunta": "A que temperatura aproximada (em Celsius) a água congela ao nível do mar?",
+    "opcoes": [
+      "0",
+      "10",
+      "32",
+      "100"
+    ],
     "resposta": "0",
     "categoria": "ciencia",
     "dificuldade": "media",
-    "explicacao": "A agua congela a cerca de 0 graus Celsius."
+    "explicacao": "A água congela a cerca de 0 graus Celsius."
   },
   {
     "id": "p045",
-    "pergunta": "Que simbolo inicia um comentario de uma linha em Python?",
-    "opcoes": ["//", "#", "--", "/*"],
+    "pergunta": "Que símbolo inicia um comentário de uma linha em Python?",
+    "opcoes": [
+      "//",
+      "#",
+      "--",
+      "/*"
+    ],
     "resposta": "#",
     "categoria": "programacao",
     "dificuldade": "facil",
-    "explicacao": "Comentarios de linha em Python usam '#'."
+    "explicacao": "Comentários de linha em Python usam '#'."
   },
   {
     "id": "p046",
     "pergunta": "Qual valor booleano representa verdade em Python?",
-    "opcoes": ["true", "TRUE", "Verdadeiro", "True"],
+    "opcoes": [
+      "true",
+      "TRUE",
+      "Verdadeiro",
+      "True"
+    ],
     "resposta": "True",
     "categoria": "programacao",
     "dificuldade": "media",
-    "explicacao": "Python usa True e False com inicial maiuscula."
+    "explicacao": "Python usa True e False com inicial maiúscula."
   },
   {
     "id": "p047",
     "pergunta": "Que cor resulta da mistura de azul e amarelo?",
-    "opcoes": ["Verde", "Laranja", "Roxo", "Castanho"],
+    "opcoes": [
+      "Verde",
+      "Laranja",
+      "Roxo",
+      "Castanho"
+    ],
     "resposta": 0,
     "categoria": "cultura_geral",
     "dificuldade": "facil",
@@ -424,11 +659,16 @@
   },
   {
     "id": "p048",
-    "pergunta": "Qual desporto e jogado com um cesto?",
-    "opcoes": ["Futebol", "Andebol", "Basquetebol", "Voleibol"],
+    "pergunta": "Qual desporto é jogado com um cesto?",
+    "opcoes": [
+      "Futebol",
+      "Andebol",
+      "Basquetebol",
+      "Voleibol"
+    ],
     "resposta": "Basquetebol",
     "categoria": "cultura_geral",
     "dificuldade": "facil",
-    "explicacao": "No basquetebol o objetivo e marcar no cesto adversario."
+    "explicacao": "No basquetebol o objetivo é marcar no cesto adversário."
   }
 ]

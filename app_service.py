@@ -53,6 +53,35 @@ from ui import (
 from validacao import pedir_confirmacao, pedir_inteiro_intervalo, pedir_nickname
 
 
+ROTULOS_DIFICULDADE = {
+    "facil": "fácil",
+    "media": "média",
+    "dificil": "difícil",
+}
+
+
+def formatar_opcao_filtro(rotulo, valor):
+    """Formata valor de filtro para apresentação ao utilizador.
+
+    Args:
+        rotulo (str): Nome do filtro.
+        valor (str): Valor interno do filtro.
+
+    Returns:
+        str: Valor pronto para exibição na consola.
+
+    Raises:
+        Nenhum.
+
+    Side Effects:
+        Nenhum.
+    """
+    valor_str = str(valor)
+    if str(rotulo).strip().lower() != "dificuldade":
+        return valor_str
+    return ROTULOS_DIFICULDADE.get(valor_str.lower(), valor_str)
+
+
 def escolher_filtro(rotulo, valores):
     """Permite escolher um valor de filtro, incluindo opcao `'todas'`.
 
@@ -72,10 +101,10 @@ def escolher_filtro(rotulo, valores):
     opcoes = ["todas"] + list(valores)
     print(f"\nEscolhe {rotulo}:")
     for indice, opcao in enumerate(opcoes, start=1):
-        print(f"{indice}) {opcao}")
+        print(f"{indice}) {formatar_opcao_filtro(rotulo, opcao)}")
 
     escolha = pedir_inteiro_intervalo(
-        prompt="Opcao: ",
+        prompt="Opção: ",
         minimo=1,
         maximo=len(opcoes),
     )
@@ -83,13 +112,13 @@ def escolher_filtro(rotulo, valores):
 
 
 def configurar_sessao_base(dificuldade):
-    """Constroi configuracao fixa da sessao conforme contrato atual.
+    """Constroi configuracao fixa da sessão conforme contrato atual.
 
     Args:
         dificuldade (str): Dificuldade selecionada no fluxo atual.
 
     Returns:
-        dict: Configuracao final de sessao.
+        dict: Configuracao final de sessão.
 
     Raises:
         Nenhum.
@@ -164,19 +193,19 @@ def mostrar_feedback_pergunta(avaliacao, pergunta):
         mostrar_mensagem_erro("Resposta errada.")
 
     if pergunta.get("explicacao"):
-        mostrar_mensagem_info(f"Explicacao: {pergunta.get('explicacao')}")
+        mostrar_mensagem_info(f"Explicação: {pergunta.get('explicacao')}")
 
 
 def executar_sessao_interativa(perguntas, config, nickname):
-    """Executa sessao interativa com avaliacao de dominio separada.
+    """Executa sessão interativa com avaliacao de dominio separada.
 
     Args:
-        perguntas (list[dict]): Perguntas selecionadas para sessao.
-        config (dict): Configuracao da sessao.
+        perguntas (list[dict]): Perguntas selecionadas para sessão.
+        config (dict): Configuracao da sessão.
         nickname (str): Nome do jogador.
 
     Returns:
-        dict: Resultado consolidado da sessao.
+        dict: Resultado consolidado da sessão.
 
     Raises:
         ValueError: Em inconsistencias de avaliacao.
@@ -211,8 +240,8 @@ def carregar_contexto_aplicacao():
         dict: Contexto com perguntas validas e metadados de carga.
 
     Raises:
-        FileNotFoundError: Quando ficheiro de perguntas nao existe.
-        ValueError: Quando nao existem perguntas validas suficientes.
+        FileNotFoundError: Quando ficheiro de perguntas não existe.
+        ValueError: Quando não existem perguntas validas suficientes.
 
     Side Effects:
         - Le ficheiro de perguntas.
@@ -253,7 +282,7 @@ def executar_fluxo_jogo(contexto_app):
 
     Side Effects:
         - Le input e escreve no terminal.
-        - Le/escreve ficheiros JSON de historico e pontuacoes.
+        - Le/escreve ficheiros JSON de histórico e pontuacoes.
         - Regista eventos de observabilidade.
     """
     iniciar_ecra("Modo Jogo")
@@ -275,7 +304,7 @@ def executar_fluxo_jogo(contexto_app):
         )
         if len(perguntas_filtradas) < NUM_PERGUNTAS_FIXAS:
             mostrar_mensagem_erro(
-                "Nao ha perguntas suficientes para jogar 10 nesta dificuldade. "
+                "Não há perguntas suficientes para jogar 10 nesta dificuldade. "
                 "Escolhe outra dificuldade."
             )
             continuar = pedir_confirmacao("Queres escolher outros filtros? (s/n): ")
@@ -288,12 +317,12 @@ def executar_fluxo_jogo(contexto_app):
         try:
             ids_historico_global = reiniciar_historico_se_necessario(ids_elegiveis)
         except (ValueError, OSError) as erro:
-            registrar_evento("ERROR", "erro_historico_reiniciar", {"erro": str(erro)})
-            mostrar_mensagem_erro("Falha ao preparar historico de perguntas.")
+            registrar_evento("ERROR", "erro_histórico_reiniciar", {"erro": str(erro)})
+            mostrar_mensagem_erro("Falha ao preparar o histórico de perguntas.")
             return
 
-        print(f"\nEsta partida tera sempre {NUM_PERGUNTAS_FIXAS} perguntas.")
-        print(f"Tempo por pergunta: {TEMPO_LIMITE_FIXO}s | Pontuacao por dificuldade: ativa.")
+        print(f"\nEsta partida terá sempre {NUM_PERGUNTAS_FIXAS} perguntas.")
+        print(f"Tempo por pergunta: {TEMPO_LIMITE_FIXO}s | Pontuação por dificuldade: ativa.")
 
         selecionadas = selecionar_perguntas_com_historico(
             perguntas=perguntas_filtradas,
@@ -301,13 +330,13 @@ def executar_fluxo_jogo(contexto_app):
             ids_historico_global=ids_historico_global,
         )
         if not selecionadas:
-            mostrar_mensagem_erro("Nao foi possivel selecionar perguntas.")
+            mostrar_mensagem_erro("Não foi possível selecionar perguntas.")
             return
 
         config_sessao = configurar_sessao_base(dificuldade)
         registrar_evento(
             "INFO",
-            "sessao_inicio",
+            "sessão_inicio",
             {
                 "nickname": nickname,
                 "modo": "jogo",
@@ -330,17 +359,17 @@ def executar_fluxo_jogo(contexto_app):
             )
         except (ValueError, OSError) as erro:
             registrar_evento("ERROR", "erro_guardar_pontuacao", {"erro": str(erro)})
-            mostrar_mensagem_erro("Nao foi possivel guardar pontuacao.")
+            mostrar_mensagem_erro("Não foi possível guardar a pontuação.")
 
         try:
             atualizar_historico_global(resultado.get("ids_usadas_sessao", []))
         except (ValueError, OSError) as erro:
-            registrar_evento("ERROR", "erro_atualizar_historico", {"erro": str(erro)})
-            mostrar_mensagem_erro("Nao foi possivel atualizar historico de perguntas.")
+            registrar_evento("ERROR", "erro_atualizar_histórico", {"erro": str(erro)})
+            mostrar_mensagem_erro("Não foi possível atualizar o histórico de perguntas.")
 
         registrar_evento(
             "INFO",
-            "sessao_fim",
+            "sessão_fim",
             {
                 "nickname": nickname,
                 "modo": "jogo",
@@ -396,7 +425,7 @@ def executar_fluxo_campeonato(contexto_app):
 
     if len(perguntas_filtradas) < NUM_PERGUNTAS_FIXAS:
         mostrar_mensagem_erro(
-            "Nao ha perguntas suficientes para campeonato com 10 por ronda nesta dificuldade."
+            "Não há perguntas suficientes para o campeonato com 10 por ronda nesta dificuldade."
         )
         return
 
@@ -480,7 +509,7 @@ def processar_opcao_menu(opcao, contexto_app):
     """Processa opcao selecionada no menu principal.
 
     Args:
-        opcao (int): Opcao numerica escolhida.
+        opcao (int): Opção numerica escolhida.
         contexto_app (dict): Contexto global da aplicacao.
 
     Returns:
@@ -504,7 +533,7 @@ def processar_opcao_menu(opcao, contexto_app):
             mostrar_top10()
         except (ValueError, OSError) as erro:
             registrar_evento("ERROR", "erro_mostrar_top10", {"erro": str(erro)})
-            mostrar_mensagem_erro("Nao foi possivel carregar o Top 10.")
+            mostrar_mensagem_erro("Não foi possível carregar o Top 10.")
         aguardar_enter("Pressiona Enter para voltar ao menu... ")
     elif opcao == 4:
         executar_fluxo_campeonato(contexto_app)
@@ -566,7 +595,7 @@ def executar_aplicacao():
     if invalidas:
         iniciar_ecra("Arranque")
         mostrar_mensagem_aviso(
-            f"Foram ignoradas {invalidas} perguntas invalidas durante a carga."
+            f"Foram ignoradas {invalidas} perguntas inválidas durante a carga."
         )
         aguardar_enter("Pressiona Enter para continuar para o menu... ")
 

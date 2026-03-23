@@ -108,7 +108,7 @@ def _erro_validacao(indice, pergunta_id, campo, motivo):
     """
     id_legivel = pergunta_id or "sem_id"
     return (
-        f"Pergunta invalida (indice={indice}, id={id_legivel}, "
+        f"Pergunta inválida (índice={indice}, id={id_legivel}, "
         f"campo={campo}): {motivo}."
     )
 
@@ -131,7 +131,7 @@ def validar_lista_perguntas(perguntas):
     if not isinstance(perguntas, list):
         raise ValueError("O ficheiro de perguntas deve conter uma lista JSON.")
     if not perguntas:
-        raise ValueError("O ficheiro de perguntas nao contem entradas.")
+        raise ValueError("O ficheiro de perguntas não contém entradas.")
 
 
 def validar_pergunta(pergunta, indice=0, ids_vistos=None):
@@ -152,7 +152,7 @@ def validar_pergunta(pergunta, indice=0, ids_vistos=None):
         - Pode atualizar o mapa `ids_vistos` com novo ID valido.
     """
     if not isinstance(pergunta, dict):
-        raise ValueError(_erro_validacao(indice, "", "estrutura", "nao e dicionario"))
+        raise ValueError(_erro_validacao(indice, "", "estrutura", "não é dicionário"))
 
     pergunta_id = _id_pergunta(pergunta)
     if not pergunta_id:
@@ -176,7 +176,7 @@ def validar_pergunta(pergunta, indice=0, ids_vistos=None):
                 indice,
                 pergunta_id,
                 "opcoes",
-                "deve ser lista com pelo menos 2 opcoes",
+                "deve ser lista com pelo menos 2 opções",
             )
         )
 
@@ -187,7 +187,7 @@ def validar_pergunta(pergunta, indice=0, ids_vistos=None):
                     indice,
                     pergunta_id,
                     "opcoes",
-                    f"opcao na posicao {posicao} esta vazia",
+                    f"opção na posição {posicao} está vazia",
                 )
             )
 
@@ -211,7 +211,7 @@ def validar_pergunta(pergunta, indice=0, ids_vistos=None):
                 indice,
                 pergunta_id,
                 "dificuldade",
-                "deve ser 'facil', 'media' ou 'dificil'",
+                "deve ser 'facil', 'media' ou 'dificil' (sem acentos)",
             )
         )
 
@@ -238,21 +238,21 @@ def normalizar_indice_resposta(pergunta):
     resposta = pergunta.get("resposta")
 
     if not isinstance(opcoes, list) or not opcoes:
-        raise ValueError("Campo 'opcoes' invalido para normalizar resposta.")
+        raise ValueError("Campo 'opcoes' inválido para normalizar resposta.")
 
     if isinstance(resposta, int):
         if 0 <= resposta < len(opcoes):
             return resposta
         if 1 <= resposta <= len(opcoes):
             return resposta - 1
-        raise ValueError("Resposta numerica fora do intervalo das opcoes.")
+        raise ValueError("Resposta numérica fora do intervalo das opções.")
 
     if isinstance(resposta, str):
         alvo = resposta.strip().lower()
         for indice, opcao in enumerate(opcoes):
             if str(opcao).strip().lower() == alvo:
                 return indice
-        raise ValueError("Resposta textual nao corresponde a nenhuma opcao.")
+        raise ValueError("Resposta textual não corresponde a nenhuma opção.")
 
     raise ValueError("Campo 'resposta' deve ser int ou str.")
 
@@ -279,7 +279,7 @@ def carregar_perguntas_com_relatorio(caminho=CAMINHO_PERGUNTAS, minimo_validas=N
         - Le ficheiro JSON de perguntas.
     """
     if not os.path.exists(caminho):
-        raise FileNotFoundError(f"Ficheiro de perguntas nao encontrado: '{caminho}'.")
+        raise FileNotFoundError(f"Ficheiro de perguntas não encontrado: '{caminho}'.")
 
     perguntas_raw = carregar_json(caminho, [])
     validar_lista_perguntas(perguntas_raw)
@@ -303,9 +303,9 @@ def carregar_perguntas_com_relatorio(caminho=CAMINHO_PERGUNTAS, minimo_validas=N
 
     if len(validas) < int(minimo_validas):
         raise ValueError(
-            "Perguntas validas insuficientes para jogar: "
-            f"{len(validas)} validas de {len(perguntas_raw)} totais "
-            f"(minimo exigido: {minimo_validas})."
+            "Perguntas válidas insuficientes para jogar: "
+            f"{len(validas)} válidas de {len(perguntas_raw)} totais "
+            f"(mínimo exigido: {minimo_validas})."
         )
 
     return {

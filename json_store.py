@@ -71,7 +71,7 @@ def carregar_json(caminho, valor_default):
     try:
         return json.loads(conteudo)
     except json.JSONDecodeError as erro:
-        raise ValueError(f"JSON invalido em '{caminho}'.") from erro
+        raise ValueError(f"JSON inválido em '{caminho}'.") from erro
 
 
 def guardar_json(caminho, dados):
