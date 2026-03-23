@@ -18,6 +18,7 @@ Em caso de conflito entre documentos:
   - Regras / Ajuda
   - Top 10
   - Campeonato
+- A opcao `Top 10` abre uma vista detalhada unica (sem submenu).
 - Cada sessao de jogo usa sempre `10` perguntas.
 - Tempo limite por pergunta sempre `20` segundos.
 - Pontuacao por dificuldade sempre ativa:
@@ -58,6 +59,13 @@ Em caso de conflito entre documentos:
   - `num_perguntas`, `categoria`, `dificuldade`, `ids_usadas_sessao`
   - `detalhes` (lista com resultado por pergunta)
 
+Compatibilidade de leitura/apresentacao no Top 10:
+- `nickname` vazio -> `anon`
+- `modo` ausente -> `desconhecido`
+- `dificuldade` ausente -> `desconhecida`
+- `data_iso` invalida/ausente -> `sem data`
+- campos numericos ausentes -> `0`
+
 ### `historico_perguntas.json`
 
 - Tipo: `dict`
@@ -90,3 +98,12 @@ Em caso de conflito entre documentos:
 - Em cada ronda, ambos respondem ao mesmo conjunto de 10 perguntas.
 - Vitoria da ronda por maior pontuacao da ronda.
 - Desempate final por pontos totais.
+
+## Fluxo Top 10
+
+1. Sistema carrega `pontuacoes.json` e ordena por pontos desc, percentagem desc e data desc.
+2. Sistema apresenta ate 10 registos em formato detalhado:
+   - posicao, nickname, pontos, percentagem, certas/erradas, numero de perguntas,
+     dificuldade, modo, data/hora.
+3. Em caso de registos antigos/incompletos, aplica fallback de compatibilidade
+   sem bloquear a apresentacao.
