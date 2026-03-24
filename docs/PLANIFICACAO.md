@@ -26,21 +26,21 @@ Meta deste plano: cobrir os requisitos funcionais do enunciado, com foco em:
 - [x] Carregar `data/perguntas.json`
 - [x] Validar: ficheiro existe, não vazio, campos mínimos (`pergunta`, `opcoes`)
 - [x] Menu principal com opções obrigatórias:
-  - [x] (1) Jogar
-  - [x] (2) Regras / Ajuda
-  - [x] (3) Top 10
-  - [x] (4) Campeonato
-  - [x] Saída por comando de prompt (`sair`/`0`)
+    - [x] (1) Jogar
+    - [x] (2) Regras / Ajuda
+    - [x] (3) Top 10
+    - [x] (4) Campeonato
+    - [x] Saída por comando de prompt (`sair`/`0`)
 - [x] Modo de jogo:
-  - [x] Escolher 10 perguntas aleatórias
-  - [x] Mostrar pergunta e opções numeradas
-  - [x] Pedir e validar resposta (letras, vazio, fora de intervalo)
-  - [x] Informar acerto/erro
-  - [x] Atualizar pontuação
+    - [x] Escolher 10 perguntas aleatórias
+    - [x] Mostrar pergunta e opções numeradas
+    - [x] Pedir e validar resposta (letras, vazio, fora de intervalo)
+    - [x] Informar acerto/erro
+    - [x] Atualizar pontuação
 - [x] Resumo final:
-  - [x] Pontuação total
-  - [x] Nº certas/erradas
-  - [x] Percentagem
+    - [x] Pontuação total
+    - [x] Nº certas/erradas
+    - [x] Percentagem
 - [x] Re-jogar sem reiniciar a aplicação
 
 ### 2.2 Nível 2 (implementação final)
@@ -152,18 +152,18 @@ Regras:
 
 ## 5) Entradas / Processamento / Saídas
 
-| Entradas                      | Processamento                         | Saídas                                        |
-| ----------------------------- | ------------------------------------- | --------------------------------------------- |
-| `data/perguntas.json`              | leitura + validação de schema mínimo  | lista de perguntas válidas em memória         |
-| escolha do menu               | validação de opção                    | navegação entre fluxos                        |
-| `10` perguntas por sessão     | seleção fixa por dificuldade          | seleção aleatória sem repetição               |
-| resposta do jogador           | normalização e comparação com correta | feedback acerto/erro + atualização de pontos  |
-| filtro dificuldade            | filtrar lista base por dificuldade    | conjunto elegível para sessão                 |
-| nickname                      | validação (não vazio, tamanho limite) | identificador para ranking                    |
-| resultado final               | serializar e guardar em JSON          | histórico persistente                         |
-| pedido Top 10                 | ordenar por pontos/percentagem/data   | tabela Top 10 no terminal                     |
-| tempo limite por pergunta     | medir tempo decorrido                 | resposta válida ou marcada como fora de tempo |
-| modo campeonato               | repetir rondas por jogador            | vencedor por ronda e vencedor final           |
+| Entradas                  | Processamento                         | Saídas                                        |
+| ------------------------- | ------------------------------------- | --------------------------------------------- |
+| `data/perguntas.json`     | leitura + validação de schema mínimo  | lista de perguntas válidas em memória         |
+| escolha do menu           | validação de opção                    | navegação entre fluxos                        |
+| `10` perguntas por sessão | seleção fixa por dificuldade          | seleção aleatória sem repetição               |
+| resposta do jogador       | normalização e comparação com correta | feedback acerto/erro + atualização de pontos  |
+| filtro dificuldade        | filtrar lista base por dificuldade    | conjunto elegível para sessão                 |
+| nickname                  | validação (não vazio, tamanho limite) | identificador para ranking                    |
+| resultado final           | serializar e guardar em JSON          | histórico persistente                         |
+| pedido Top 10             | ordenar por pontos/percentagem/data   | tabela Top 10 no terminal                     |
+| tempo limite por pergunta | medir tempo decorrido                 | resposta válida ou marcada como fora de tempo |
+| modo campeonato           | repetir rondas por jogador            | vencedor por ronda e vencedor final           |
 
 ---
 
@@ -270,41 +270,41 @@ Regra de projeto:
 
 ## 8) Lista de funções (sem classes)
 
-| Função                                                      | Módulo                  | Descrição                                                  |
-| ----------------------------------------------------------- | ----------------------- | ---------------------------------------------------------- |
-| `iniciar_aplicacao()`                                       | `main.py`               | Arranca app, carrega dados base, entra no loop principal.  |
-| `ciclo_menu_principal()`                                    | `main.py`               | Mostra menu e encaminha ações até sair.                    |
-| `mostrar_menu_principal()`                                  | `menu.py`               | Mostra opções obrigatórias e extras.                       |
-| `ler_opcao_menu(min_opcao, max_opcao)`                      | `menu.py`               | Lê e valida opção numérica.                                |
-| `mostrar_regras()`                                          | `ui.py`                 | Mostra ajuda/regras do jogo.                               |
-| `mostrar_mensagem_erro(texto)`                              | `ui.py`                 | Output uniforme para erros.                                |
-| `mostrar_resumo(resultado)`                                 | `ui.py`                 | Exibe resumo final formatado.                              |
-| `carregar_json(caminho, valor_default)`                     | `json_store.py`         | Lê JSON; cria default se não existir.                      |
-| `guardar_json(caminho, dados)`                              | `json_store.py`         | Guarda dados em JSON com indentação.                       |
-| `carregar_perguntas(caminho)`                               | `perguntas_service.py`  | Carrega e valida perguntas do ficheiro.                    |
-| `validar_lista_perguntas(perguntas)`                        | `perguntas_service.py`  | Valida estrutura global da lista.                          |
-| `validar_pergunta(pergunta)`                                | `perguntas_service.py`  | Valida campos mínimos e coerência por pergunta.            |
-| `normalizar_indice_resposta(pergunta)`                      | `perguntas_service.py`  | Converte resposta correta em índice de opção.              |
-| `listar_categorias(perguntas)`                              | `perguntas_service.py`  | Extrai categorias únicas.                                  |
-| `filtrar_perguntas(perguntas, categoria, dificuldade)`      | `perguntas_service.py`  | Filtra por critérios ou "todas".                           |
-| `selecionar_perguntas_aleatorias(perguntas, n, ids_evitar)` | `perguntas_service.py`  | Seleciona N sem repetição.                                 |
-| `atualizar_historico_global(ids_novas)`                     | `perguntas_service.py`  | Guarda IDs usados entre sessões.                           |
-| `obter_ids_historico_global()`                              | `perguntas_service.py`  | Carrega IDs usados globalmente.                            |
-| `reiniciar_historico_se_necessario(ids_elegiveis)`          | `perguntas_service.py`  | Reseta histórico quando esgota universo elegível.          |
-| `pedir_nickname()`                                          | `validacao.py`          | Lê nickname válido.                                        |
-| `pedir_inteiro_intervalo(prompt, minimo, maximo)`           | `validacao.py`          | Input numérico robusto.                                    |
-| `pedir_confirmacao(prompt)`                                 | `validacao.py`          | Lê confirmação sim/não.                                    |
-| `pontuar_resposta(correta, dificuldade, usar_pesos)`        | `jogo_service.py`       | Calcula pontos ganhos numa pergunta.                       |
-| `fazer_pergunta(pergunta, config)`                          | `jogo_service.py`       | Mostra pergunta, lê resposta e devolve resultado unitário. |
-| `fazer_pergunta_relogio(pergunta, config)`                  | `jogo_service.py`       | Variante com limite temporal.                              |
-| `jogar_sessao(perguntas, config, nickname)`                 | `jogo_service.py`       | Executa sessão completa e devolve resultado final.         |
-| `calcular_percentagem(certas, total)`                       | `jogo_service.py`       | Percentagem de acertos.                                    |
-| `guardar_resultado(resultado)`                              | `pontuacoes_service.py` | Persiste resultado no histórico.                           |
-| `obter_top10()`                                             | `pontuacoes_service.py` | Ordena e devolve 10 melhores resultados.                   |
-| `mostrar_top10()`                                           | `pontuacoes_service.py` | Imprime ranking no terminal.                               |
-| `jogar_campeonato(perguntas, config_base, jogador_1, jogador_2)` | `campeonato_service.py` | Coordena melhor de 3 rondas para 2 jogadores.         |
-| `jogar_ronda_campeonato(jogador, perguntas_ronda, config)`  | `campeonato_service.py` | Executa uma ronda para um jogador.                         |
-| `determinar_vencedor_campeonato(placar)`                    | `campeonato_service.py` | Decide vencedor final.                                     |
+| Função                                                           | Módulo                  | Descrição                                                  |
+| ---------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------- |
+| `iniciar_aplicacao()`                                            | `main.py`               | Arranca app, carrega dados base, entra no loop principal.  |
+| `ciclo_menu_principal()`                                         | `main.py`               | Mostra menu e encaminha ações até sair.                    |
+| `mostrar_menu_principal()`                                       | `menu.py`               | Mostra opções obrigatórias e extras.                       |
+| `ler_opcao_menu(min_opcao, max_opcao)`                           | `menu.py`               | Lê e valida opção numérica.                                |
+| `mostrar_regras()`                                               | `ui.py`                 | Mostra ajuda/regras do jogo.                               |
+| `mostrar_mensagem_erro(texto)`                                   | `ui.py`                 | Output uniforme para erros.                                |
+| `mostrar_resumo(resultado)`                                      | `ui.py`                 | Exibe resumo final formatado.                              |
+| `carregar_json(caminho, valor_default)`                          | `json_store.py`         | Lê JSON; cria default se não existir.                      |
+| `guardar_json(caminho, dados)`                                   | `json_store.py`         | Guarda dados em JSON com indentação.                       |
+| `carregar_perguntas(caminho)`                                    | `perguntas_service.py`  | Carrega e valida perguntas do ficheiro.                    |
+| `validar_lista_perguntas(perguntas)`                             | `perguntas_service.py`  | Valida estrutura global da lista.                          |
+| `validar_pergunta(pergunta)`                                     | `perguntas_service.py`  | Valida campos mínimos e coerência por pergunta.            |
+| `normalizar_indice_resposta(pergunta)`                           | `perguntas_service.py`  | Converte resposta correta em índice de opção.              |
+| `listar_categorias(perguntas)`                                   | `perguntas_service.py`  | Extrai categorias únicas.                                  |
+| `filtrar_perguntas(perguntas, categoria, dificuldade)`           | `perguntas_service.py`  | Filtra por critérios ou "todas".                           |
+| `selecionar_perguntas_aleatorias(perguntas, n, ids_evitar)`      | `perguntas_service.py`  | Seleciona N sem repetição.                                 |
+| `atualizar_historico_global(ids_novas)`                          | `perguntas_service.py`  | Guarda IDs usados entre sessões.                           |
+| `obter_ids_historico_global()`                                   | `perguntas_service.py`  | Carrega IDs usados globalmente.                            |
+| `reiniciar_historico_se_necessario(ids_elegiveis)`               | `perguntas_service.py`  | Reseta histórico quando esgota universo elegível.          |
+| `pedir_nickname()`                                               | `validacao.py`          | Lê nickname válido.                                        |
+| `pedir_inteiro_intervalo(prompt, minimo, maximo)`                | `validacao.py`          | Input numérico robusto.                                    |
+| `pedir_confirmacao(prompt)`                                      | `validacao.py`          | Lê confirmação sim/não.                                    |
+| `pontuar_resposta(correta, dificuldade, usar_pesos)`             | `jogo_service.py`       | Calcula pontos ganhos numa pergunta.                       |
+| `fazer_pergunta(pergunta, config)`                               | `jogo_service.py`       | Mostra pergunta, lê resposta e devolve resultado unitário. |
+| `fazer_pergunta_relogio(pergunta, config)`                       | `jogo_service.py`       | Variante com limite temporal.                              |
+| `jogar_sessao(perguntas, config, nickname)`                      | `jogo_service.py`       | Executa sessão completa e devolve resultado final.         |
+| `calcular_percentagem(certas, total)`                            | `jogo_service.py`       | Percentagem de acertos.                                    |
+| `guardar_resultado(resultado)`                                   | `pontuacoes_service.py` | Persiste resultado no histórico.                           |
+| `obter_top10()`                                                  | `pontuacoes_service.py` | Ordena e devolve 10 melhores resultados.                   |
+| `mostrar_top10()`                                                | `pontuacoes_service.py` | Imprime ranking no terminal.                               |
+| `jogar_campeonato(perguntas, config_base, jogador_1, jogador_2)` | `campeonato_service.py` | Coordena melhor de 3 rondas para 2 jogadores.              |
+| `jogar_ronda_campeonato(jogador, perguntas_ronda, config)`       | `campeonato_service.py` | Executa uma ronda para um jogador.                         |
+| `determinar_vencedor_campeonato(placar)`                         | `campeonato_service.py` | Decide vencedor final.                                     |
 
 ---
 
